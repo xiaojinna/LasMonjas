@@ -9,6 +9,7 @@ using static LasMonjas.MapOptions;
 using System.Collections.Generic;
 using PowerTools;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Patches
 {
@@ -462,7 +463,7 @@ namespace LasMonjas.Patches
                     myAdminIcons.transform.GetChild(2).transform.position = myAdminIcons.transform.GetChild(2).transform.position + new Vector3(0.5f, 0, 0); // Reactor
                     myAdminIcons.transform.GetChild(3).transform.position = myAdminIcons.transform.GetChild(3).transform.position + new Vector3(1.6f, 2.3f, 0); // security
                     myAdminIcons.transform.GetChild(4).transform.position = myAdminIcons.transform.GetChild(4).transform.position + new Vector3(0.7f, -0.95f, 0); // medbey
-                    myAdminIcons.transform.GetChild(5).transform.position = myAdminIcons.transform.GetChild(5).transform.position + new Vector3(0.5f, -1f, 0); // Cafetería
+                    myAdminIcons.transform.GetChild(5).transform.position = myAdminIcons.transform.GetChild(5).transform.position + new Vector3(0.5f, -1f, 0); // Cafeterï¿½a
                     myAdminIcons.transform.GetChild(6).transform.position = myAdminIcons.transform.GetChild(6).transform.position + new Vector3(0.80f, -1, 0); // weapons
                     myAdminIcons.transform.GetChild(7).transform.position = myAdminIcons.transform.GetChild(7).transform.position + new Vector3(-1.5f, -2.6f, 0); // nav
                     myAdminIcons.transform.GetChild(8).transform.position = myAdminIcons.transform.GetChild(8).transform.position + new Vector3(0f, 1.5f, 0); // shields

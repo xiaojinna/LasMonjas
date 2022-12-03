@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using static LasMonjas.LasMonjas;
 using UnityEngine;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 
 namespace LasMonjas
 {

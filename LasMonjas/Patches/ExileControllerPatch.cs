@@ -13,14 +13,15 @@ using UnityEngine;
 using System.Reflection;
 using LasMonjas.Core;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Patches {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     [HarmonyPriority(Priority.First)]
     class ExileControllerBeginPatch {
-        public static GameData.PlayerInfo lastExiled; 
+        public static GameData.PlayerInfo lastExiled;
         public static void Prefix(ExileController __instance, [HarmonyArgument(0)]ref GameData.PlayerInfo exiled, [HarmonyArgument(1)]bool tie) {
-            lastExiled = exiled;           
+            lastExiled = exiled;
 
             // Sorcerer execute casted spells
             if (Sorcerer.sorcerer != null && Sorcerer.spelledPlayers != null && AmongUsClient.Instance.AmHost) {
@@ -44,7 +45,7 @@ namespace LasMonjas.Patches {
             if (Hypnotist.hypnotist != null && HypnotistSpiral.hypnotistSpirals.Count != 0) {
                 HypnotistSpiral.activateSpirals();
             }
-            
+
             // Plumber make vents
             if (Plumber.currentVents == Plumber.maxVents && !Plumber.madeVents) {
                 var ventId = ShipStatus.Instance.AllVents.Select(x => x.Id).Max() + 1;

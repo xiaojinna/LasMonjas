@@ -10,6 +10,7 @@ using static LasMonjas.GameHistory;
 using LasMonjas.Objects;
 using UnityEngine;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Patches {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]

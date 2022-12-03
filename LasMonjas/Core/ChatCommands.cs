@@ -1,18 +1,8 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
-using BepInEx;
-using BepInEx.Configuration;
-using BepInEx.IL2CPP;
-using HarmonyLib;
-using UnityEngine;
+﻿using HarmonyLib;
 using System.Linq;
-using Il2CppInterop;
 using System.Collections.Generic;
 using static LasMonjas.LasMonjas;
-using TMPro;
-using static UnityEngine.ParticleSystem.PlaybackState;
-using Epic.OnlineServices;
+
 
 namespace LasMonjas.Core
 {
@@ -50,28 +40,6 @@ namespace LasMonjas.Core
             [HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]
             private static class SendChatPatch
             {
-                private static void ReloadLanguage(int language) {
-                    switch (language) {
-                        // English
-                        case 1:
-                            LasMonjasPlugin.modLanguage.Value = 1;
-                            break;
-                        // Spanish
-                        case 2:
-                            LasMonjasPlugin.modLanguage.Value = 2;
-                            break;
-                        // Japanese
-                        case 3:
-                            LasMonjasPlugin.modLanguage.Value = 3;
-                            break;
-                        // Chinese
-                        case 4:
-                            LasMonjasPlugin.modLanguage.Value = 4;
-                            break;
-                    }
-                    Language.LoadLanguage();
-                }
-
                 static bool Prefix(ChatController __instance) {
                     string text = __instance.TextArea.text;
                     string subText = text.Split().Last();
@@ -82,20 +50,20 @@ namespace LasMonjas.Core
                             switch (subText.ToLower()) {
                                 // Impostor roles
                                 case "english":
-                                    ReloadLanguage(1);
                                     infoText = "Las Monjas: language changed to English";
+                                    LasMonjasPlugin.modLanguage.Value = 0;
                                     break;
                                 case "spanish":
                                     infoText = "Las Monjas: idioma cambiado a Español";
-                                    ReloadLanguage(2);
+                                    LasMonjasPlugin.modLanguage.Value = 12;
                                     break;
                                 case "japanese":
                                     infoText = "Las Monjas: 言語を日本語に変更";
-                                    ReloadLanguage(3);
+                                    LasMonjasPlugin.modLanguage.Value = 11;
                                     break;
                                 case "chinese":
                                     infoText = "Las Monjas: 语言改为中文";
-                                    ReloadLanguage(4);
+                                    LasMonjasPlugin.modLanguage.Value = 13;
                                     break;
                                 default:
                                     infoText = "Las Monjas: language not supported";
@@ -109,7 +77,7 @@ namespace LasMonjas.Core
                         if (text.ToLower().StartsWith("/help ") || text.ToLower().StartsWith("/h ")) {
                             switch (LasMonjasPlugin.modLanguage.Value) {
                                 // English
-                                case 1:
+                                case 0:
                                     switch (subText.ToLower()) {
                                         // Impostor roles
                                         case "mimic":
@@ -461,7 +429,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Spanish
-                                case 2:
+                                case 12:
                                     switch (subText.ToLower()) {
                                         // Impostor roles
                                         case "mimic":
@@ -812,7 +780,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Japanese
-                                case 3:
+                                case 11:
                                     switch (subText.ToLower()) {
                                         // Impostor roles
                                         case "mimic":
@@ -1163,7 +1131,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Chinese
-                                case 4:
+                                case 13:
                                     switch (subText.ToLower()) {
                                         // Impostor roles
                                         case "mimic":
@@ -1512,7 +1480,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                             }
-                            
+
                             handled = true;
                             __instance.AddChat(PlayerControl.LocalPlayer, infoText);
                             //PlayerControl.LocalPlayer.RpcSendChat(infoText);
@@ -1524,7 +1492,7 @@ namespace LasMonjas.Core
                         if (text.ToLower().StartsWith("/myrole") || text.ToLower().StartsWith("/m")) {
                             switch (LasMonjasPlugin.modLanguage.Value) {
                                 // English
-                                case 1:
+                                case 0:
                                     if (roleInfo == null) {
                                         infoText = "You don't have a Role.";
                                     }
@@ -1800,7 +1768,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Spanish
-                                case 2:
+                                case 12:
                                     if (roleInfo == null) {
                                         infoText = "No tienes un Rol.";
                                     }
@@ -2077,7 +2045,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Japanese
-                                case 3:
+                                case 11:
                                     if (roleInfo == null) {
                                         infoText = "あなたには役割がありません。";
                                     }
@@ -2353,7 +2321,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Chinese
-                                case 4:
+                                case 13:
                                     if (roleInfo == null) {
                                         infoText = "你没有职业。";
                                     }
@@ -2629,13 +2597,13 @@ namespace LasMonjas.Core
                             }
                             handled = true;
                             __instance.AddChat(PlayerControl.LocalPlayer, infoText);
-                            //PlayerControl.LocalPlayer.RpcSendChat(infoText);                          
+                            //PlayerControl.LocalPlayer.RpcSendChat(infoText);
                         }
                         RoleInfo roleInfoModifier = infos.Where(info => info.isModifier).FirstOrDefault();
                         if (text.ToLower().StartsWith("/mymodifier") || text.ToLower().StartsWith("/mymod")) {
                             switch (LasMonjasPlugin.modLanguage.Value) {
                                 // English
-                                case 1:
+                                case 0:
                                     if (roleInfoModifier == null) {
                                         infoText = "You don't have a Modifier.";
                                     }
@@ -2684,7 +2652,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Spanish
-                                case 2:
+                                case 12:
                                     if (roleInfoModifier == null) {
                                         infoText = "No tienes un Modificador.";
                                     }
@@ -2733,7 +2701,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Japanese
-                                case 3:
+                                case 11:
                                     if (roleInfoModifier == null) {
                                         infoText = "修飾子はありません。";
                                     }
@@ -2782,7 +2750,7 @@ namespace LasMonjas.Core
                                     }
                                     break;
                                 // Chinese
-                                case 4:
+                                case 13:
                                     if (roleInfoModifier == null) {
                                         infoText = "你没有附加职业";
                                     }

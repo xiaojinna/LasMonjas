@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "restore": {
+    "e:\\Amonguszmod\\LasMonjas\\LasMonjas\\LasMonjas.csproj": {}
+  },
+  "projects": {
+    "e:\\Amonguszmod\\LasMonjas\\LasMonjas\\LasMonjas.csproj": {
+      "version": "3.0.3",
+      "restore": {
+        "projectUniqueName": "e:\\Amonguszmod\\LasMonjas\\LasMonjas\\LasMonjas.csproj",
+        "projectName": "LasMonjas",
+        "projectPath": "e:\\Amonguszmod\\LasMonjas\\LasMonjas\\LasMonjas.csproj",
+        "packagesPath": "C:\\Users\\huier\\.nuget\\packages\\",
+        "outputPath": "e:\\Amonguszmod\\LasMonjas\\LasMonjas\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\huier\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.bepinex.dev/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AmongUs.GameLibs.Steam": {
+              "target": "Package",
+              "version": "[2022.10.25, )"
+            },
+            "BepInEx.IL2CPP.MSBuild": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
+            "BepInEx.Unity.IL2CPP": {
+              "target": "Package",
+              "version": "[6.0.0-be.662, )"
+            },
+            "Reactor": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.10, 6.0.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.10, 6.0.10]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.10, 6.0.10]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100-rc.2.22477.23\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

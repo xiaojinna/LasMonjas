@@ -7,6 +7,7 @@ using static LasMonjas.HudManagerStartPatch;
 using Hazel;
 using LasMonjas.Patches;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Objects
 {
@@ -153,13 +154,13 @@ namespace LasMonjas.Objects
                         AmongUsClient.Instance.FinishRpcImmediately(killWriter);
                         RPCProcedure.activateEngineerTrap(target.PlayerId, engineerTrap.myTrapType);
 
-                    }                   
+                    }
 
                     if (p == 1f && engineerTrap != null) {
                         Engineer.currentTrapNumber -= 1;
                         engineerTrap.engineerTrap.transform.position = new Vector3(-1000, 500, 0);
                         //UnityEngine.Object.Destroy(trap);
-                        //traps.Remove(this);                   
+                        //traps.Remove(this);
                     }
 
                 })));

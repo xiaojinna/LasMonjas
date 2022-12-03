@@ -14,6 +14,7 @@ using LasMonjas.Objects;
 using LasMonjas.Patches;
 using Il2CppInterop.Runtime.InteropTypes;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using LasMonjas.Languages;
 
 namespace LasMonjas
 {

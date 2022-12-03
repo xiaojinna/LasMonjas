@@ -7,6 +7,7 @@ using static LasMonjas.HudManagerStartPatch;
 using Hazel;
 using LasMonjas.Patches;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Objects
 {
@@ -169,12 +170,12 @@ namespace LasMonjas.Objects
                         killWriter.Write(player.PlayerId);
                         AmongUsClient.Instance.FinishRpcImmediately(killWriter);
                         RPCProcedure.activateSpiralTrap(target.PlayerId);
-                    }                    
+                    }
 
                     if (p == 1f && hypnotistSpiral != null) {
                         hypnotistSpiral.hypnotistSpiral.transform.position = new Vector3(-1000, 500, 0);
                         //UnityEngine.Object.Destroy(trap);
-                        //traps.Remove(this);                   
+                        //traps.Remove(this);
                     }
 
                 })));

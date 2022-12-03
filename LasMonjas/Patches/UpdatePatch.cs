@@ -13,6 +13,7 @@ using Reactor;
 using static LasMonjas.MapOptions;
 using LasMonjas.Core;
 using static LasMonjas.HudManagerStartPatch;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Patches {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]

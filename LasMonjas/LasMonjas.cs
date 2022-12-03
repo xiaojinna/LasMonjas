@@ -13,6 +13,7 @@ using UnityEngine;
 using LasMonjas.Objects;
 using LasMonjas.Patches;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 
 namespace LasMonjas
 {

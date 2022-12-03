@@ -14,6 +14,7 @@ using Il2CppInterop;
 using UnityEngine;
 using LasMonjas.Core;
 using LasMonjas.Patches;
+using LasMonjas.Languages;
 using BepInEx.Unity.IL2CPP;
 using Reactor;
 using Reactor.Networking;

@@ -7,6 +7,7 @@ using System.Linq;
 using LasMonjas.Objects;
 using LasMonjas.Core;
 using Hazel;
+using LasMonjas.Languages;
 
 namespace LasMonjas.Patches
 {

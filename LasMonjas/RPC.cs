@@ -13,6 +13,7 @@ using LasMonjas.Objects;
 using LasMonjas.Patches;
 using static LasMonjas.RoleInfo;
 using LasMonjas.Core;
+using LasMonjas.Languages;
 using MS.Internal.Xml.XPath;
 using static UnityEngine.GraphicsBuffer;
 
