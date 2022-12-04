@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.Linq;
-using static LasMonjas.HudManagerStartPatch;
-using Hazel;
 using LasMonjas.Patches;
 
 namespace LasMonjas.Objects
@@ -12,8 +8,8 @@ namespace LasMonjas.Objects
     class RockPaperScissors
     {
         public static List<RockPaperScissors> rockpaperscissors = new List<RockPaperScissors>();
-        private static Sprite rocksprite; 
-        private static Sprite papersprite; 
+        private static Sprite rocksprite;
+        private static Sprite papersprite;
         private static Sprite scissorsprite;
         private Color color;
         private GameObject rockpaperscissor;
@@ -57,7 +53,7 @@ namespace LasMonjas.Objects
                 case 3:
                     spriteRenderer.sprite = getScissorsSprite();
                     break;
-            }           
+            }
             spriteRenderer.color = color;
 
             rockpaperscissor.SetActive(true);

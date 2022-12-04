@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using System.Linq;
 using LasMonjas.Patches;
@@ -40,23 +39,23 @@ namespace LasMonjas.Objects {
 
         public Hats(Vector2 p) {
             gameObject = new GameObject("Hat");
-            gameObject.AddSubmergedComponent(SubmergedCompatibility.Classes.ElevatorMover); 
+            gameObject.AddSubmergedComponent(SubmergedCompatibility.Classes.ElevatorMover);
             if (PlayerControl.GameOptions.MapId == 5) {
                 position = new Vector3(p.x, p.y, -0.5f);
             }
             else {
                 position = new Vector3(p.x, p.y, PlayerControl.LocalPlayer.transform.position.z + 1f);
             }
-            position += (Vector3)PlayerControl.LocalPlayer.Collider.offset; 
-            
+            position += (Vector3)PlayerControl.LocalPlayer.Collider.offset;
+
             gameObject.transform.position = position;
             var hatRenderer = gameObject.AddComponent<SpriteRenderer>();
             hatRenderer.sprite = getHatAnimationSprite(0);
 
-            
+
             var referenceVent = UnityEngine.Object.FindObjectOfType<Vent>();
             vent = UnityEngine.Object.Instantiate<Vent>(referenceVent);
-            vent.gameObject.AddSubmergedComponent(SubmergedCompatibility.Classes.ElevatorMover); 
+            vent.gameObject.AddSubmergedComponent(SubmergedCompatibility.Classes.ElevatorMover);
             vent.transform.position = gameObject.transform.position;
             vent.Left = null;
             vent.Right = null;
@@ -75,7 +74,7 @@ namespace LasMonjas.Objects {
             vent.gameObject.SetActive(false);
             vent.name = "Hat_" + vent.Id;
 
-            
+
             var playerIsIllusionist = PlayerControl.LocalPlayer == Illusionist.illusionist;
             gameObject.SetActive(playerIsIllusionist);
 
@@ -119,7 +118,7 @@ namespace LasMonjas.Objects {
                 a.vent.Right = b.vent;
                 b.vent.Left = a.vent;
             }
-            
+
             AllHats.First().vent.Left = AllHats.Last().vent;
             AllHats.Last().vent.Right = AllHats.First().vent;
         }

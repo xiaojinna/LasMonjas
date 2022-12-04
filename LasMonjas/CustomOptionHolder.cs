@@ -1,22 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
-using BepInEx.Configuration;
-using System;
-using System.Linq;
-using HarmonyLib;
-using Hazel;
-using System.Reflection;
-using System.Text;
-using static LasMonjas.LasMonjas;
 using LasMonjas.Core;
 
 namespace LasMonjas
 {
     public class CustomOptionHolder {
-        public static string[] rates = new string[]{"0%", "100%"}; 
+        public static string[] rates = new string[]{"0%", "100%"};
         public static string[] presets = new string[]{"Roles", "Capture the Flag", "Police and Thieves", "King of the Hill", "Hot Potato", "Zombie Laboratory", "Battle Royale", "Preset 8", "Preset 9", "Preset 10" };
 
-        // Game Options 
+        // Game Options
         public static CustomOption presetSelection;
 
         // Global Settings
@@ -27,7 +18,7 @@ namespace LasMonjas
         public static CustomOption whoAmIMode;
 
         // Roles Settings
-        public static CustomOption rolesSettings;        
+        public static CustomOption rolesSettings;
         public static CustomOption removeSwipeCard;
         public static CustomOption removeAirshipDoors;
         public static CustomOption nightVisionLightSabotage;

@@ -39,7 +39,7 @@ namespace LasMonjas.Patches {
         public static void Postfix(RegionMenu __instance) {
             var template = DestroyableSingleton<JoinGameButton>.Instance;
             var joinGameButtons = GameObject.FindObjectsOfType<JoinGameButton>();
-            foreach (var t in joinGameButtons) {  
+            foreach (var t in joinGameButtons) {
                 if (t.GameIdText != null && t.GameIdText.Background != null) {
                     template = t;
                     break;
@@ -54,7 +54,7 @@ namespace LasMonjas.Patches {
                 if (arrow == null || arrow.gameObject == null) return;
                 UnityEngine.Object.DestroyImmediate(arrow.gameObject);
 
-                ipField.transform.localPosition = new Vector3(3f, 0.9f, -100f); 
+                ipField.transform.localPosition = new Vector3(3f, 0.9f, -100f);
                 ipField.characterLimit = 30;
                 ipField.AllowSymbols = true;
                 ipField.ForceUppercase = false;
@@ -64,7 +64,7 @@ namespace LasMonjas.Patches {
                     ipField.SetText(LasMonjasPlugin.IpCustom.Value);
                 })));
 
-                ipField.ClearOnFocus = false; 
+                ipField.ClearOnFocus = false;
                 ipField.OnEnter = ipField.OnChange = new Button.ButtonClickedEvent();
                 ipField.OnFocusLost = new Button.ButtonClickedEvent();
                 ipField.OnChange.AddListener((UnityAction)onEnterOrIpChange);
@@ -87,12 +87,12 @@ namespace LasMonjas.Patches {
                 if (arrow == null || arrow.gameObject == null) return;
                 UnityEngine.Object.DestroyImmediate(arrow.gameObject);
 
-                portField.transform.localPosition = new Vector3(3f, 0.15f, -100f); 
+                portField.transform.localPosition = new Vector3(3f, 0.15f, -100f);
                 portField.characterLimit = 5;
                 portField.SetText(LasMonjasPlugin.PortCustom.Value.ToString());
                 __instance.StartCoroutine(Effects.Lerp(0.1f, new Action<float>((p) => {
                     portField.outputText.SetText(LasMonjasPlugin.PortCustom.Value.ToString());
-                    portField.SetText(LasMonjasPlugin.PortCustom.Value.ToString()); 
+                    portField.SetText(LasMonjasPlugin.PortCustom.Value.ToString());
                 })));
 
 
@@ -111,7 +111,7 @@ namespace LasMonjas.Patches {
                         portField.outputText.color = Color.red;
                     }
                 }
-                
+
                 void onFocusLost() {
                     LasMonjasPlugin.UpdateRegions();
                     __instance.ChooseOption(ServerManager.DefaultRegions[ServerManager.DefaultRegions.Length - 1]);

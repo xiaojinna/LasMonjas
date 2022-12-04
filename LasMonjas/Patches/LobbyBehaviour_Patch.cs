@@ -1,14 +1,8 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using System.Reflection;
 using System.Collections.Generic;
-using Hazel;
 using System;
-using Il2CppInterop;
 using System.Linq;
-using System.Collections;
-using Reactor;
-using Il2CppSystem.Security.Cryptography;
 
 namespace LasMonjas.Patches
 {
@@ -130,6 +124,6 @@ namespace LasMonjas.Patches
                     }
                 }
             }
-        }       
+        }
     }
 }

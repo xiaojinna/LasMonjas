@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.Linq;
-using static LasMonjas.HudManagerStartPatch;
 using Hazel;
 using LasMonjas.Patches;
 
@@ -61,20 +58,20 @@ namespace LasMonjas.Objects
                 }
 
                 if (timer <= 0f) {
-                    if (Bomberman.activeBomb == true && localBombNumber == Bomberman.currentBombNumber) { 
+                    if (Bomberman.activeBomb == true && localBombNumber == Bomberman.currentBombNumber) {
                         MessageWriter writermusic = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.BombermanWin, Hazel.SendOption.Reliable, -1);
                         AmongUsClient.Instance.FinishRpcImmediately(writermusic);
-                        RPCProcedure.bombermanWin(); 
+                        RPCProcedure.bombermanWin();
                     }
-                } 
-                
+                }
+
                 if (p == 1f && bomb != null) {
                     UnityEngine.Object.Destroy(bomb);
                     bombs.Remove(this);
                 }
-               
+
             })));
 
-        }        
+        }
     }
 }

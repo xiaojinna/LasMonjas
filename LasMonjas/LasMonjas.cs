@@ -1,18 +1,9 @@
-using System.Net;
 using System.Linq;
-using BepInEx;
-using BepInEx.Configuration;
-using BepInEx.IL2CPP;
 using HarmonyLib;
-using Hazel;
 using System;
 using System.Collections.Generic;
-using System.Collections;
-using System.IO;
 using UnityEngine;
 using LasMonjas.Objects;
-using LasMonjas.Patches;
-using LasMonjas.Core;
 using LasMonjas.Languages;
 
 namespace LasMonjas
@@ -53,7 +44,7 @@ namespace LasMonjas
         public static bool createdzombielaboratory = false;
 
         public static bool createdbattleroyale = false;
-        
+
         public static bool activatedReportButtonAfterCustomMode = false;
 
         public static int quackNumber = 0;

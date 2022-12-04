@@ -5,10 +5,8 @@ using UnityEngine;
 using System.Linq;
 using static LasMonjas.LasMonjas;
 using static LasMonjas.GameHistory;
-using static LasMonjas.MapOptions;
 using System.Collections.Generic;
 using PowerTools;
-using LasMonjas.Core;
 using LasMonjas.Languages;
 
 namespace LasMonjas.Patches
@@ -160,7 +158,7 @@ namespace LasMonjas.Patches
                 if (!__instance.EnterVentAnim) {
                     return false;
                 }
-                
+
                 var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
 
                 Vector2 vector = pc.GetTruePosition() - truePosition;
@@ -186,11 +184,11 @@ namespace LasMonjas.Patches
         public static class ExitVentPatch
         {
             public static bool Prefix(Vent __instance, PlayerControl pc) {
-                
+
                 if (!__instance.ExitVentAnim) {
                     return false;
                 }
-                
+
                 var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
 
                 Vector2 vector = pc.GetTruePosition() - truePosition;
@@ -212,7 +210,7 @@ namespace LasMonjas.Patches
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     class KillButtonDoClickPatch
     {
@@ -363,7 +361,7 @@ namespace LasMonjas.Patches
                 roleCanCallEmergency = false;
                 statusText = Language.usablesTexts[5];
             }
-            
+
             // Deactivate emergency button if Monja awakened
             if (Monja.monja != null && Monja.awakened) {
                 roleCanCallEmergency = false;
@@ -595,14 +593,14 @@ namespace LasMonjas.Patches
     class SurveillanceMinigamePatch
     {
         private static int page = 0;
-        private static float timer = 0f;       
+        private static float timer = 0f;
 
         [HarmonyPatch(typeof(SurveillanceMinigame), nameof(SurveillanceMinigame.Begin))]
         class SurveillanceMinigameBeginPatch
         {
             public static void Postfix(SurveillanceMinigame __instance) {
 
-                if (nightVision) { 
+                if (nightVision) {
                 GameObject gameObject = __instance.Viewables.transform.Find("CloseButton").gameObject;
                 nightOverlay = new List<GameObject>();
                 foreach (MeshRenderer meshRenderer in __instance.ViewPorts) {
@@ -766,7 +764,7 @@ namespace LasMonjas.Patches
             }
 
         }
-        
+
         [HarmonyPatch(typeof(PlanetSurveillanceMinigame), nameof(PlanetSurveillanceMinigame.Begin))]
         class PlanetSurveillanceMinigameBeginPatch
         {
@@ -788,7 +786,7 @@ namespace LasMonjas.Patches
 
                     canNightOverlay = true;
                     removeNightOverlay = true;
-                }                
+                }
             }
         }
 
@@ -797,7 +795,7 @@ namespace LasMonjas.Patches
         {
 
             public static bool Prefix(PlanetSurveillanceMinigame __instance) {
-               
+
                 if (nightVision && !PlayerControl.LocalPlayer.Data.Role.IsImpostor) {
                     if (Modifiers.lighter != null && PlayerControl.LocalPlayer == Modifiers.lighter) return false;
                     foreach (PlayerTask task in PlayerControl.LocalPlayer.myTasks) {

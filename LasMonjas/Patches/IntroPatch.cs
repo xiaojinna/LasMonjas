@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using LasMonjas.Objects;
 using LasMonjas.Core;
-using Hazel;
 using LasMonjas.Languages;
 
 namespace LasMonjas.Patches
@@ -24,7 +23,7 @@ namespace LasMonjas.Patches
                     GameData.PlayerInfo data = p.Data;
                     PoolablePlayer player = UnityEngine.Object.Instantiate<PoolablePlayer>(__instance.PlayerPrefab, HudManager.Instance.transform);
                     p.SetPlayerMaterialColors(player.cosmetics.currentBodySprite.BodySprite);
-                    player.SetSkin(data.DefaultOutfit.SkinId, data.DefaultOutfit.ColorId); 
+                    player.SetSkin(data.DefaultOutfit.SkinId, data.DefaultOutfit.ColorId);
                     player.cosmetics.hat.SetHat(data.DefaultOutfit.HatId, data.DefaultOutfit.ColorId);
                     //p.SetPetImage(player.cosmetics.currentPet, data.DefaultOutfit.ColorId, player.cosmetics.currentPet.rend);
                     player.cosmetics.nameText.text = data.PlayerName;
@@ -41,7 +40,7 @@ namespace LasMonjas.Patches
                         player.gameObject.SetActive(false);
                     }
                 }
-            }           
+            }
         }
     }
 
@@ -353,7 +352,7 @@ namespace LasMonjas.Patches
                     }
                     createdduelarena = true;
                 }
-                
+
                 // Create the seaker arena if there's a Seeker
                 if (Seeker.seeker != null && PlayerControl.LocalPlayer != null && !createdseekerarena) {
                     GameObject seekerArena = GameObject.Instantiate(CustomMain.customAssets.seekerArena, PlayerControl.LocalPlayer.transform.parent);
@@ -370,7 +369,7 @@ namespace LasMonjas.Patches
                     Seeker.minigameArenaHideThreePointOne = seekerArena.transform.GetChild(2).transform.GetChild(0).gameObject;
                     Seeker.minigameArenaHideThreePointOne.transform.parent.transform.position = Seeker.minigameArenaHideThreePointOne.transform.parent.transform.position + new Vector3(0, 0, -2);
                     Seeker.minigameArenaHideThreePointTwo = seekerArena.transform.GetChild(2).transform.GetChild(1).gameObject;
-                    Seeker.minigameArenaHideThreePointThree = seekerArena.transform.GetChild(2).transform.GetChild(2).gameObject; 
+                    Seeker.minigameArenaHideThreePointThree = seekerArena.transform.GetChild(2).transform.GetChild(2).gameObject;
                     if (PlayerControl.GameOptions.MapId == 5) { // Create another duel arena on submerged lower floor
                         GameObject lowerseekerArena = GameObject.Instantiate(CustomMain.customAssets.seekerArena, PlayerControl.LocalPlayer.transform.parent);
                         lowerseekerArena.name = "lowerseekerArena";
@@ -545,7 +544,7 @@ namespace LasMonjas.Patches
                 }
 
                 // Create susBoxes for Stranded
-                if (Stranded.stranded != null && Stranded.stranded == PlayerControl.LocalPlayer && !createdStrandedBoxes) {                                       
+                if (Stranded.stranded != null && Stranded.stranded == PlayerControl.LocalPlayer && !createdStrandedBoxes) {
                     GameObject ammoBox01 = GameObject.Instantiate(CustomMain.customAssets.susBox, PlayerControl.LocalPlayer.transform.parent);
                     ammoBox01.transform.position = Stranded.susBoxPositions[0];
                     ammoBox01.name = "ammoBox";
@@ -565,7 +564,7 @@ namespace LasMonjas.Patches
                     Stranded.groundItems.Add(ammoBox02);
                     Stranded.groundItems.Add(ammoBox03);
                     Stranded.groundItems.Add(ventBox);
-                    Stranded.groundItems.Add(invisibleBox);                  
+                    Stranded.groundItems.Add(invisibleBox);
                     // Nothing boxes
                     for (int i = 0; i < Stranded.susBoxPositions.Count - 5; i++) {
                         GameObject nothingBox = GameObject.Instantiate(CustomMain.customAssets.susBox, PlayerControl.LocalPlayer.transform.parent);
@@ -667,7 +666,7 @@ namespace LasMonjas.Patches
                         whoAmIModeImpostorItems.Add(whoAmIImpostorBox);
                         whoAmIModeGlobalItems.Add(whoAmIImpostorBox);
                     }
-                    
+
                     string[] rebelsRoleNames = new string[9] { "renegadeRole", "trapperRole", "yinyangerRole", "challengerRole", "ninjaRole", "berserkerRole", "yandereRole", "strandedRole", "monjaRole" };
                     // Rebel boxes
                     for (int i = 0; i < ZombieLaboratory.susBoxPositions.Count - 51; i++) {
@@ -709,7 +708,7 @@ namespace LasMonjas.Patches
                     }
                     createdWhoAmI = true;
                 }
-                
+
                 if (howmanygamemodesareon == 1) {
                     switch (PlayerControl.GameOptions.MapId) {
                         // Skeld / Custom Skeld
@@ -3449,7 +3448,7 @@ namespace LasMonjas.Patches
 
                     switch (whichgamemodeHUD) {
                         // Capture The Flag
-                        case 1: 
+                        case 1:
                             new CustomMessage(Language.introTexts[1], CaptureTheFlag.matchDuration, -1, -1.3f, 3);
                             new CustomMessage(CaptureTheFlag.flagpointCounter, CaptureTheFlag.matchDuration, -1, 1.9f, 5);
                             // Add Arrows pointing the flags
@@ -3459,7 +3458,7 @@ namespace LasMonjas.Patches
                             CaptureTheFlag.localBlueFlagArrow[0].arrow.SetActive(true);
                             break;
                         // Police And Thiefs
-                        case 2: 
+                        case 2:
                             if (!PoliceAndThief.policeCanSeeJewels) {
                                 foreach (PlayerControl police in PoliceAndThief.policeTeam) {
                                     if (police == PlayerControl.LocalPlayer) {
@@ -3474,7 +3473,7 @@ namespace LasMonjas.Patches
                             new CustomMessage(PoliceAndThief.thiefpointCounter, PoliceAndThief.matchDuration, -1, 1.9f, 8);
                             break;
                         // King Of The Hill
-                        case 3: 
+                        case 3:
                             new CustomMessage(Language.introTexts[1], KingOfTheHill.matchDuration, -1, -1.3f, 10);
                             new CustomMessage(KingOfTheHill.kingpointCounter, KingOfTheHill.matchDuration, -1, 1.9f, 12);
                             // Add Arrows pointing the zones
@@ -3506,10 +3505,10 @@ namespace LasMonjas.Patches
                             }
                             break;
                         // Hot Potato
-                        case 4: 
+                        case 4:
                             break;
                         // Zombie Laboratory
-                        case 5: 
+                        case 5:
                             // Spawn key items
                             GameObject keyitem01 = GameObject.Instantiate(CustomMain.customAssets.susBox, PlayerControl.LocalPlayer.transform.parent);
                             keyitem01.transform.position = ZombieLaboratory.susBoxPositions[0];
@@ -3570,7 +3569,7 @@ namespace LasMonjas.Patches
                             new CustomMessage(ZombieLaboratory.zombieLaboratoryCounter, ZombieLaboratory.matchDuration, -1, 1.9f, 20);
                             break;
                         // Battle Royale
-                        case 6: 
+                        case 6:
                             new CustomMessage(Language.introTexts[1], BattleRoyale.matchDuration, -1, -1.3f, 24);
                             switch (BattleRoyale.matchType) {
                                 case 0:
@@ -3650,7 +3649,7 @@ namespace LasMonjas.Patches
 
             if (removeAirshipDoors && removedAirshipDoors == false && PlayerControl.GameOptions.MapId == 4) {
                 List<GameObject> doors = new List<GameObject>();
-                
+
                 GameObject celldoor01 = GameObject.Find("doorsideOpen (2)");
                 doors.Add(celldoor01);
                 GameObject celldoor02 = GameObject.Find("door_vault");

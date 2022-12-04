@@ -2,14 +2,8 @@ using HarmonyLib;
 using Hazel;
 using System.Collections.Generic;
 using System.Linq;
-using Il2CppInterop;
-using static LasMonjas.LasMonjas;
-using static LasMonjas.MapOptions;
-using System.Collections;
 using System;
-using System.Text;
 using UnityEngine;
-using System.Reflection;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
 namespace LasMonjas.Patches {
@@ -19,7 +13,7 @@ namespace LasMonjas.Patches {
         static SpriteRenderer[] renderers;
         private static GameData.PlayerInfo target = null;
         private const float scale = 0.65f;
-        
+
         [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.CheckForEndVoting))]
         class MeetingCalculateVotesPatch {
             private static Dictionary<byte, int> CalculateVotes(MeetingHud __instance) {
@@ -62,7 +56,7 @@ namespace LasMonjas.Patches {
 
             static bool Prefix(MeetingHud __instance) {
                 if (__instance.playerStates.All((PlayerVoteArea ps) => ps.AmDead || ps.DidVote)) {
-                    
+
 			        Dictionary<byte, int> self = CalculateVotes(__instance);
                     bool tie;
 			        KeyValuePair<byte, int> max = self.MaxPair(out tie);
@@ -70,14 +64,14 @@ namespace LasMonjas.Patches {
 
                     byte forceTargetPlayerId = Captain.captain != null && !Captain.captain.Data.IsDead && Captain.specialVoteTargetPlayerId != byte.MaxValue ? Captain.specialVoteTargetPlayerId : byte.MaxValue;
                     if (forceTargetPlayerId != byte.MaxValue)
-                        tie = false; 
-                    
+                        tie = false;
+
                     MeetingHud.VoterState[] array = new MeetingHud.VoterState[__instance.playerStates.Length];
                     for (int i = 0; i < __instance.playerStates.Length; i++)
                     {
                         PlayerVoteArea playerVoteArea = __instance.playerStates[i];
                         if (forceTargetPlayerId != byte.MaxValue)
-                            playerVoteArea.VotedFor = forceTargetPlayerId; 
+                            playerVoteArea.VotedFor = forceTargetPlayerId;
                         array[i] = new MeetingHud.VoterState {
                             VoterId = playerVoteArea.TargetPlayerId,
                             VotedForId = playerVoteArea.VotedFor
@@ -85,8 +79,8 @@ namespace LasMonjas.Patches {
                     }
 
                     if (forceTargetPlayerId != byte.MaxValue)
-                        exiled = GameData.Instance.AllPlayers.ToArray().FirstOrDefault(v => v.PlayerId == forceTargetPlayerId && !v.IsDead); 
-                    
+                        exiled = GameData.Instance.AllPlayers.ToArray().FirstOrDefault(v => v.PlayerId == forceTargetPlayerId && !v.IsDead);
+
                     __instance.RpcVotingComplete(array, exiled, tie);
                 }
                 return false;
@@ -97,7 +91,7 @@ namespace LasMonjas.Patches {
         class MeetingHudBloopAVoteIconPatch {
             public static bool Prefix(MeetingHud __instance, [HarmonyArgument(0)]GameData.PlayerInfo voterPlayer, [HarmonyArgument(1)]int index, [HarmonyArgument(2)]Transform parent) {
                 SpriteRenderer spriteRenderer = UnityEngine.Object.Instantiate<SpriteRenderer>(__instance.PlayerVotePrefab);
-                int cId = voterPlayer.DefaultOutfit.ColorId; 
+                int cId = voterPlayer.DefaultOutfit.ColorId;
                 if (PlayerControl.GameOptions.AnonymousVotes)
                     voterPlayer.Object.SetColor(6);
                 voterPlayer.Object.SetPlayerMaterialColors(spriteRenderer);
@@ -105,14 +99,14 @@ namespace LasMonjas.Patches {
                 spriteRenderer.transform.localScale = Vector3.zero;
                 __instance.StartCoroutine(Effects.Bloop((float)index * 0.3f, spriteRenderer.transform, 1f, 0.5f));
                 parent.GetComponent<VoteSpreader>().AddVote(spriteRenderer);
-                voterPlayer.Object.SetColor(cId); 
+                voterPlayer.Object.SetColor(cId);
                 return false;
             }
-        } 
+        }
 
         [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.PopulateResults))]
         class MeetingHudPopulateVotesPatch {
-            
+
             static bool Prefix(MeetingHud __instance, Il2CppStructArray<MeetingHud.VoterState> states) {
 
                 // Cheater cheat
@@ -158,7 +152,7 @@ namespace LasMonjas.Patches {
                         // Captain vote, redo this iteration to place a second vote
                         if (Captain.captain != null && voterState.VoterId == (sbyte)Captain.captain.PlayerId && !captainFirstVoteDisplayed) {
                             captainFirstVoteDisplayed = true;
-                            j--;    
+                            j--;
                         }
                     }
                 }
@@ -170,7 +164,7 @@ namespace LasMonjas.Patches {
         class MeetingHudVotingCompletedPatch {
             static void Postfix(MeetingHud __instance, [HarmonyArgument(0)]byte[] states, [HarmonyArgument(1)]GameData.PlayerInfo exiled, [HarmonyArgument(2)]bool tie)
             {
-                
+
                 if (Captain.captain != null && Captain.captain == PlayerControl.LocalPlayer && Captain.specialVoteTargetPlayerId == byte.MaxValue) {
                     for (int i = 0; i < __instance.playerStates.Length; i++) {
                         PlayerVoteArea voteArea = __instance.playerStates[i];
@@ -179,7 +173,7 @@ namespace LasMonjas.Patches {
                             t.gameObject.SetActive(false);
                     }
                 }
-                
+
                 // Reset cheater values
                 Cheater.playerId1 = Byte.MaxValue;
                 Cheater.playerId2 = Byte.MaxValue;
@@ -208,8 +202,8 @@ namespace LasMonjas.Patches {
                     selections[i] = false;
                 } else {
                     selections[i] = true;
-                    renderer.color = Color.green;   
-                    
+                    renderer.color = Color.green;
+
                     PlayerVoteArea firstPlayer = null;
                     PlayerVoteArea secondPlayer = null;
                     for (int A = 0; A < selections.Length; A++) {
@@ -411,7 +405,7 @@ namespace LasMonjas.Patches {
                 }
             }
 
-            //Fix visor in Meetings 
+            //Fix visor in Meetings
             foreach (PlayerVoteArea pva in __instance.playerStates) {
                 if(pva.PlayerIcon != null && pva.PlayerIcon.cosmetics.visor != null){
                     pva.PlayerIcon.cosmetics.visor.transform.position += new Vector3(0, 0, -1f);
@@ -525,11 +519,11 @@ namespace LasMonjas.Patches {
                     }
                 }
 
-                // Monja reset item 
+                // Monja reset item
                 if (Monja.monja != null && Monja.isDeliveringItem && Monja.monja == PlayerControl.LocalPlayer) {
                     RPCProcedure.monjaRevertItemPosition(Monja.itemId);
                 }
-                
+
                 // If Jailer jailed exists, remove the jailed
                 if (Jailer.jailer != null && Jailer.jailedPlayer != null) {
                     Jailer.jailedPlayer = null;
@@ -576,7 +570,7 @@ namespace LasMonjas.Patches {
                 if (Librarian.librarian != null && Librarian.targetLibrary != null && Librarian.targetLibrary == PlayerControl.LocalPlayer) {
                     return false;
                 }
-                return true; 
+                return true;
             }
         }
     }

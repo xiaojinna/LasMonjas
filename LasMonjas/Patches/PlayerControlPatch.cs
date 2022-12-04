@@ -3,8 +3,6 @@ using Hazel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static LasMonjas.LasMonjas;
 using static LasMonjas.GameHistory;
 using LasMonjas.Objects;
@@ -161,7 +159,7 @@ namespace LasMonjas.Patches {
                 if (Puppeteer.puppeteer != null && Puppeteer.morphed) {
                     PlayerControl target = Puppeteer.transformTarget;
                     Puppeteer.puppeteer.setLook(target.Data.PlayerName, target.Data.DefaultOutfit.ColorId, target.Data.DefaultOutfit.HatId, target.Data.DefaultOutfit.VisorId, target.Data.DefaultOutfit.SkinId, target.Data.DefaultOutfit.PetId);
-                }                
+                }
             }
 
             // Mimic reset (only if paint is inactive)
@@ -207,7 +205,7 @@ namespace LasMonjas.Patches {
             if (Sorcerer.spellTarget != null)
                 untargetables = PlayerControl.AllPlayerControls.ToArray().Where(x => x.PlayerId != Sorcerer.spellTarget.PlayerId).ToList(); // Don't switch the target from the the one you're currently casting a spell on
             else {
-                untargetables = Sorcerer.spelledPlayers; 
+                untargetables = Sorcerer.spelledPlayers;
             }
             Sorcerer.currentTarget = setTarget(true, untargetablePlayers: untargetables);
             setPlayerOutline(Sorcerer.currentTarget, Sorcerer.color);
@@ -398,7 +396,7 @@ namespace LasMonjas.Patches {
                         if (localPlayerPositions.Count > 1) localPlayerPositions.RemoveAt(0); // Skip every second position to rewind twice as fast, but never skip the last position
                     }
 
-                    // Try reviving LOCAL player 
+                    // Try reviving LOCAL player
                     if (TimeTraveler.reviveDuringRewind && PlayerControl.LocalPlayer.Data.IsDead) {
                         DeadPlayer deadPlayer = deadPlayers.Where(x => x.player == PlayerControl.LocalPlayer).FirstOrDefault();
                         if (deadPlayer != null && next.Item2 < deadPlayer.timeOfDeath) {
@@ -607,8 +605,7 @@ namespace LasMonjas.Patches {
             if (Jinx.target != null && Jinx.jinxedList.Any(p => p.Data.PlayerId == Jinx.target.Data.PlayerId)) Jinx.target = null; // Remove target if already Jinxed and didn't trigger the jinx
         }
         static void necromancerUpdate() {
-            
-        }        
+        }
         static void shyUpdate() {
 
             if (Shy.shy == null)
@@ -660,7 +657,7 @@ namespace LasMonjas.Patches {
             if (Jailer.jailer == null || Jailer.jailer != PlayerControl.LocalPlayer) return;
             Jailer.currentTarget = setTarget();
             if (!Jailer.usedJail) setPlayerOutline(Jailer.currentTarget, Jailer.color);
-        }        
+        }
         static void theChosenOneUpdate() {
             if (Modifiers.theChosenOne == null || Modifiers.theChosenOne != PlayerControl.LocalPlayer) return;
 
@@ -741,8 +738,8 @@ namespace LasMonjas.Patches {
                     new PaintballTrail(player, killerPlayer);
                 }
             }
-        }              
-        
+        }
+
         static void captureTheFlagSetTarget() {
 
             if (!CaptureTheFlag.captureTheFlagMode || CaptureTheFlag.captureTheFlagMode && howmanygamemodesareon != 1)
@@ -1353,8 +1350,8 @@ namespace LasMonjas.Patches {
             }
 
             if (ZombieLaboratory.nursePlayer != null) {
-                untargetableSurvivorsPlayers.Add(ZombieLaboratory.nursePlayer);                
-                untargetableZombiePlayers.Add(ZombieLaboratory.nursePlayer);                            
+                untargetableSurvivorsPlayers.Add(ZombieLaboratory.nursePlayer);
+                untargetableZombiePlayers.Add(ZombieLaboratory.nursePlayer);
             }
 
             // Prevent killing reviving players
@@ -1654,7 +1651,7 @@ namespace LasMonjas.Patches {
 
                 // Ventcolor
                 ventColorUpdate();
-                
+
                 // Impostor
                 impostorSetTarget();
 
@@ -1689,13 +1686,13 @@ namespace LasMonjas.Patches {
 
                 // Trapper
                 trapperSetTarget();
-                
+
                 // Yinyanger
                 yinyangerSetTarget();
 
                 // Challenger
                 challengerSetTarget();
-                
+
                 // Ninja
                 ninjaSetTarget();
 
@@ -1752,7 +1749,7 @@ namespace LasMonjas.Patches {
                 sleuthUpdate();
 
                 // Fink
-                finkUpdate();       
+                finkUpdate();
 
                 // Welder
                 welderSetTarget();
@@ -1780,10 +1777,10 @@ namespace LasMonjas.Patches {
 
                 // Performer Update
                 performerUpdate();
-                
+
                 // Paintball
                 paintballTrail();
-                
+
                 // Capture the flag update
                 captureTheFlagSetTarget();
 
@@ -1821,15 +1818,15 @@ namespace LasMonjas.Patches {
             }
 
             // Murder the bitten player before the meeting starts or reset the bitten player
-            Helpers.handleDemonBiteOnBodyReport();        
-            
+            Helpers.handleDemonBiteOnBodyReport();
+
             // Murder the Spiritualist if someone reports a body or call emergency while trying to revive another player
             if (Spiritualist.spiritualist != null && Spiritualist.isReviving && Spiritualist.canRevive) {
                 MessageWriter murderSpiritualist = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.MurderSpiritualistIfReportWhileReviving, Hazel.SendOption.Reliable, -1);
                 AmongUsClient.Instance.FinishRpcImmediately(murderSpiritualist);
                 RPCProcedure.murderSpiritualistIfReportWhileReviving();
             }
-            
+
             // Performer isreported
             if (Modifiers.performer != null && Modifiers.performer.Data.IsDead && !Modifiers.performerReported) {
                 MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.PerformerIsReported, Hazel.SendOption.Reliable, -1);
@@ -1989,7 +1986,7 @@ namespace LasMonjas.Patches {
                 Kid.triggerKidLose = true;
                 ShipStatus.RpcEndGame((GameOverReason)CustomGameOverReason.KidLose, false);
             }
-            
+
             // Janitor Button Sync
             if (Janitor.janitor != null && PlayerControl.LocalPlayer == Janitor.janitor && __instance == Janitor.janitor && HudManagerStartPatch.janitorCleanButton != null)
                 HudManagerStartPatch.janitorCleanButton.Timer = Janitor.janitor.killTimer;
@@ -2009,7 +2006,7 @@ namespace LasMonjas.Patches {
             if (Chameleon.chameleon != null && target == Chameleon.chameleon) {
                 Chameleon.resetChameleon();
             }
-            
+
             // Sorcerer Button Sync
             if (Sorcerer.sorcerer != null && PlayerControl.LocalPlayer == Sorcerer.sorcerer && __instance == Sorcerer.sorcerer && HudManagerStartPatch.sorcererSpellButton != null)
                 HudManagerStartPatch.sorcererSpellButton.Timer = HudManagerStartPatch.sorcererSpellButton.MaxTimer;
@@ -2026,7 +2023,7 @@ namespace LasMonjas.Patches {
                     Archer.bow.gameObject.SetActive(Archer.weaponEquiped);
                 }
             }
-            
+
             // Librarian restore abilty use if silenced target died
             if (Librarian.librarian != null && Librarian.targetLibrary != null && target == Librarian.targetLibrary) {
                 Librarian.targetLibrary = null;
@@ -2055,7 +2052,7 @@ namespace LasMonjas.Patches {
                     Yinyanger.resetYanged();
                 }
             }
-            
+
             // Ninja reset marked if killed
             if (Ninja.ninja != null && Ninja.markedTarget != null && target == Ninja.markedTarget) {
                 Ninja.markedTarget = null;
@@ -2067,7 +2064,7 @@ namespace LasMonjas.Patches {
                 Berserker.killedFirstTime = false;
                 Berserker.timeToKill = Berserker.backupTimeToKill;
             }
-            
+
             // Yandere rampage mode
             if (Yandere.yandere != null && Yandere.yandere != __instance && Yandere.target != null && target == Yandere.target && !Yandere.rampageMode) {
                 Yandere.rampageMode = true;
@@ -2082,7 +2079,7 @@ namespace LasMonjas.Patches {
             if (Stranded.stranded != null && (target == Stranded.stranded || __instance == Stranded.stranded && Stranded.isInvisible)) {
                 Stranded.resetStranded();
             }
-            
+
             // Monja revert item if killed
             if (Monja.monja != null && target.PlayerId == Monja.monja.PlayerId) {
                 if (Monja.isDeliveringItem) {
@@ -2154,14 +2151,14 @@ namespace LasMonjas.Patches {
             if (Exiler.exiler != null && Exiler.target != null && target == Exiler.target && !Exiler.exiler.Data.IsDead) {
                 Exiler.exiler.MurderPlayer(Exiler.exiler);
             }
-            
+
             // Reset hided player if killed
             if (Seeker.seeker != null) {
                 if (Seeker.seeker == target) {
                     Seeker.ResetValues(false);
                 }
                 if (Seeker.hidedPlayerOne != null && target == Seeker.hidedPlayerOne) {
-                    Seeker.ResetOnePlayer(1);                    
+                    Seeker.ResetOnePlayer(1);
                 }
                 if (Seeker.hidedPlayerTwo != null && target == Seeker.hidedPlayerTwo) {
                     Seeker.ResetOnePlayer(2);
@@ -2175,12 +2172,12 @@ namespace LasMonjas.Patches {
             if (Squire.squire != null && Squire.shielded != null && target == Squire.squire) {
                 Squire.shielded = null;
             }
-            
+
             // Forensic add body
             if (Forensic.deadBodies != null) {
                 Forensic.featureDeadBodies.Add(new Tuple<DeadPlayer, Vector3>(deadPlayer, target.transform.position));
             }
-            
+
             // Sleuth store body positions
             if (Sleuth.deadBodyPositions != null) Sleuth.deadBodyPositions.Add(target.transform.position);
 
@@ -2195,7 +2192,7 @@ namespace LasMonjas.Patches {
                 if (vigilantdoorlog != null) {
                     vigilantdoorlog.SetActive(false);
                 }
-            }           
+            }
 
             // Hunter target suicide trigger on Hunter murder
             if (Hunter.hunter != null && target == Hunter.hunter) {
@@ -2209,12 +2206,12 @@ namespace LasMonjas.Patches {
             if (Necromancer.necromancer != null && target == Necromancer.necromancer && Necromancer.dragginBody) {
                 Necromancer.necromancerResetValuesAtDead();
             }
-            
+
             // Task Master clear extra tasks if killed while doing them
             if (TaskMaster.taskMaster != null && target == TaskMaster.taskMaster && TaskMaster.clearedInitialTasks) {
                 target.clearAllTasks();
             }
-            
+
             // If Jailer killed, remove the jailed
             if (Jailer.jailer != null && Jailer.jailedPlayer != null && target == Jailer.jailer) {
                 Jailer.jailedPlayer = null;
@@ -2252,7 +2249,7 @@ namespace LasMonjas.Patches {
                 }
                 new Tased(Modifiers.electricianDuration, __instance);
             }
-            
+
             if (howmanygamemodesareon == 1) {
                 // Capture the flag revive player
                 if (CaptureTheFlag.captureTheFlagMode) {
@@ -2418,7 +2415,7 @@ namespace LasMonjas.Patches {
                             else if (CaptureTheFlag.redplayer07 != null && target.PlayerId == CaptureTheFlag.redplayer07.PlayerId) {
                                 CaptureTheFlag.redplayer07IsReviving = true;
                             }
-                            Helpers.alphaPlayer(true, player.PlayerId);                            
+                            Helpers.alphaPlayer(true, player.PlayerId);
                             HudManager.Instance.StartCoroutine(Effects.Lerp(CaptureTheFlag.reviveTime, new Action<float>((p) => {
                                 if (p == 1f && player != null) {
                                     if (CaptureTheFlag.redplayer01 != null && target.PlayerId == CaptureTheFlag.redplayer01.PlayerId) {
@@ -2442,7 +2439,7 @@ namespace LasMonjas.Patches {
                                     else if (CaptureTheFlag.redplayer07 != null && target.PlayerId == CaptureTheFlag.redplayer07.PlayerId) {
                                         CaptureTheFlag.redplayer07IsReviving = false;
                                     }
-                                    Helpers.alphaPlayer(false, player.PlayerId);                                   
+                                    Helpers.alphaPlayer(false, player.PlayerId);
                                 }
                             })));
 
@@ -2519,7 +2516,7 @@ namespace LasMonjas.Patches {
                             else if (CaptureTheFlag.blueplayer07 != null && target.PlayerId == CaptureTheFlag.blueplayer07.PlayerId) {
                                 CaptureTheFlag.blueplayer07IsReviving = true;
                             }
-                            Helpers.alphaPlayer(true, player.PlayerId);                           
+                            Helpers.alphaPlayer(true, player.PlayerId);
                             HudManager.Instance.StartCoroutine(Effects.Lerp(CaptureTheFlag.reviveTime, new Action<float>((p) => {
                                 if (p == 1f && player != null) {
                                     if (CaptureTheFlag.blueplayer01 != null && target.PlayerId == CaptureTheFlag.blueplayer01.PlayerId) {
@@ -2543,7 +2540,7 @@ namespace LasMonjas.Patches {
                                     else if (CaptureTheFlag.blueplayer07 != null && target.PlayerId == CaptureTheFlag.blueplayer07.PlayerId) {
                                         CaptureTheFlag.blueplayer07IsReviving = false;
                                     }
-                                    Helpers.alphaPlayer(false, player.PlayerId);                                    
+                                    Helpers.alphaPlayer(false, player.PlayerId);
                                 }
                             })));
 
@@ -2621,7 +2618,7 @@ namespace LasMonjas.Patches {
                             else if (PoliceAndThief.policeplayer06 != null && target.PlayerId == PoliceAndThief.policeplayer06.PlayerId) {
                                 PoliceAndThief.policeplayer06IsReviving = true;
                             }
-                            Helpers.alphaPlayer(true, player.PlayerId);                            
+                            Helpers.alphaPlayer(true, player.PlayerId);
                             HudManager.Instance.StartCoroutine(Effects.Lerp(PoliceAndThief.policeReviveTime, new Action<float>((p) => {
                                 if (p == 1f && player != null) {
                                     if (PoliceAndThief.policeplayer01 != null && target.PlayerId == PoliceAndThief.policeplayer01.PlayerId) {
@@ -2642,7 +2639,7 @@ namespace LasMonjas.Patches {
                                     else if (PoliceAndThief.policeplayer06 != null && target.PlayerId == PoliceAndThief.policeplayer06.PlayerId) {
                                         PoliceAndThief.policeplayer06IsReviving = false;
                                     }
-                                    Helpers.alphaPlayer(false, player.PlayerId);                                    
+                                    Helpers.alphaPlayer(false, player.PlayerId);
                                 }
                             })));
 
@@ -4067,7 +4064,7 @@ namespace LasMonjas.Patches {
                         alivePlayers += 1;
                     }
                 }
-            }          
+            }
         }
     }
 

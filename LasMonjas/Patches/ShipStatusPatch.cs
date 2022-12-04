@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
 using HarmonyLib;
-using Il2CppInterop.Runtime;
-using static LasMonjas.LasMonjas;
 using UnityEngine;
 
 namespace LasMonjas.Patches
@@ -239,16 +235,16 @@ namespace LasMonjas.Patches
                             break;
                     }
                 }
-                
+
                 return true;
             }
         }
-            
+
         [HarmonyPatch(typeof(SwitchSystem), nameof(SwitchSystem.RepairDamage))]
         class SwitchSystemRepairPatch
         {
             public static void Postfix(SwitchSystem __instance, [HarmonyArgument(0)] PlayerControl player, [HarmonyArgument(1)] byte amount) {
-                
+
                 // Mechanic expert lights repairs
                 if (Mechanic.mechanic != null && Mechanic.mechanic == player && Mechanic.expertRepairs) {
 

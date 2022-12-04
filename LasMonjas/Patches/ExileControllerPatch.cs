@@ -2,15 +2,10 @@ using HarmonyLib;
 using Hazel;
 using System.Collections.Generic;
 using System.Linq;
-using Il2CppInterop;
 using static LasMonjas.LasMonjas;
 using LasMonjas.Objects;
-using static LasMonjas.MapOptions;
-using System.Collections;
 using System;
-using System.Text;
 using UnityEngine;
-using System.Reflection;
 using LasMonjas.Core;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using LasMonjas.Languages;
@@ -72,7 +67,7 @@ namespace LasMonjas.Patches {
                 Plumber.Vents.Last().Right = Plumber.Vents.First();
                 Plumber.madeVents = true;
             }
-            
+
             // Welder vents seal after meeting
             foreach (Vent vent in MapOptions.ventsToSeal) {
                 PowerTools.SpriteAnim animator = vent.GetComponent<PowerTools.SpriteAnim>();
@@ -82,8 +77,8 @@ namespace LasMonjas.Patches {
                 vent.myRend.color = Color.white;
                 vent.name = "SealedVent_" + vent.name;
             }
-            MapOptions.ventsToSeal = new List<Vent>();          
-            
+            MapOptions.ventsToSeal = new List<Vent>();
+
             // Vigilant cameras activate after meeting
             var allCameras = ShipStatus.Instance.AllCameras.ToList();
             MapOptions.camerasToAdd.ForEach(camera => {
@@ -115,7 +110,7 @@ namespace LasMonjas.Patches {
                 WrapUpPostfix(__instance.exiled);
             }
         }
-        
+
         [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
         class AirshipExileControllerPatch {
             public static void Postfix(AirshipExileController __instance) {
@@ -129,7 +124,7 @@ namespace LasMonjas.Patches {
             if (PlayerControl.GameOptions.MapId != 5) return;
             if (obj.name.Contains("ExileCutscene")) {
                 WrapUpPostfix(ExileControllerBeginPatch.lastExiled);
-            }            
+            }
         }
 
         static void WrapUpPostfix(GameData.PlayerInfo exiled) {
@@ -152,7 +147,7 @@ namespace LasMonjas.Patches {
                 AmongUsClient.Instance.FinishRpcImmediately(writer);
                 RPCProcedure.resetSilenced();
             }
-            
+
             // BountyHunter exile if the exiled player was the bounty hunter target
             if (BountyHunter.bountyhunter != null && !BountyHunter.bountyhunter.Data.IsDead && BountyHunter.hasToKill.Data.IsDead) {
                 BountyHunter.bountyhunter.Exiled();
@@ -165,7 +160,7 @@ namespace LasMonjas.Patches {
                 Yinyanger.yinyedplayer = null;
                 Yinyanger.yangyedplayer = null;
                 Yinyanger.colision = false;
-            }           
+            }
 
             // Yandere rampage mode
             if (exiled != null && Yandere.yandere != null && Yandere.target != null && Yandere.target.PlayerId == exiled.PlayerId) {
@@ -214,7 +209,7 @@ namespace LasMonjas.Patches {
             // Captain reset specialTarget
             if (Captain.captain != null && !Captain.captain.Data.IsDead && Captain.usedSpecialVote) {
                 if (Captain.specialVoteTarget != null && Captain.specialVoteTarget.Data.IsDead && !Captain.specialVoteTarget.Data.Role.IsImpostor && Captain.specialVoteTarget != Renegade.renegade && Captain.specialVoteTarget != Minion.minion && Captain.specialVoteTarget != BountyHunter.bountyhunter && Captain.specialVoteTarget != Trapper.trapper && Captain.specialVoteTarget != Yinyanger.yinyanger && Captain.specialVoteTarget != Challenger.challenger && Captain.specialVoteTarget != Ninja.ninja && Captain.specialVoteTarget != Berserker.berserker && Captain.specialVoteTarget != Yandere.yandere && Captain.specialVoteTarget != Stranded.stranded && Captain.specialVoteTarget != Monja.monja && Captain.specialVoteTarget != Joker.joker && Captain.specialVoteTarget != RoleThief.rolethief && Captain.specialVoteTarget != Pyromaniac.pyromaniac && Captain.specialVoteTarget != TreasureHunter.treasureHunter && Captain.specialVoteTarget != Devourer.devourer && Captain.specialVoteTarget != Poisoner.poisoner && Captain.specialVoteTarget != Puppeteer.puppeteer && Captain.specialVoteTarget != Exiler.exiler && Captain.specialVoteTarget != Amnesiac.amnesiac && Captain.specialVoteTarget != Seeker.seeker) {
-                    Captain.captain.Exiled();                                        
+                    Captain.captain.Exiled();
                 }
                 Captain.specialVoteTargetPlayerId = byte.MaxValue;
                 Captain.specialVoteTarget = null;
@@ -241,7 +236,7 @@ namespace LasMonjas.Patches {
                     Forensic.featureDeadBodies = new List<Tuple<DeadPlayer, Vector3>>();
                 }
             }
-            
+
             // Squire reset shielded if exiled
             if (Squire.resetShieldAfterMeeting || exiled != null && Squire.squire != null && Squire.shielded != null && Squire.squire.PlayerId == exiled.PlayerId) {
                 Squire.shielded = null;
@@ -258,10 +253,10 @@ namespace LasMonjas.Patches {
                 Cheater.cheatedP1 = null;
                 Cheater.cheatedP2 = null;
                 Cheater.usedCheat = false;
-            }      
+            }
 
             // Sleuth reset deadBodyPositions after meeting
-            Sleuth.deadBodyPositions = new List<Vector3>();           
+            Sleuth.deadBodyPositions = new List<Vector3>();
 
             //Change Music based on alive player number if not on submerged
             MessageWriter musicwriter = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.ChangeMusic, Hazel.SendOption.Reliable, -1);

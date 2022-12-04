@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,7 +73,7 @@ namespace LasMonjas.Core {
         public static void HudUpdate()
         {
             buttons.RemoveAll(item => item.actionButton == null);
-        
+
             for (int i = 0; i < buttons.Count; i++)
             {
                 try
@@ -144,7 +142,7 @@ namespace LasMonjas.Core {
             if (showButtonText && buttonText != ""){
                 actionButton.OverrideText(buttonText);
             }
-            actionButton.buttonLabelText.enabled = showButtonText; 
+            actionButton.buttonLabelText.enabled = showButtonText;
             if (hudManager.UseButton != null) {
                 Vector3 pos = hudManager.UseButton.transform.localPosition;
                 if (mirror) pos = new Vector3(-pos.x, pos.y, pos.z);
@@ -164,13 +162,13 @@ namespace LasMonjas.Core {
                 else if (!PlayerControl.LocalPlayer.inVent && PlayerControl.LocalPlayer.moveable)
                     Timer -= Time.deltaTime;
             }
-            
+
             if (Timer <= 0 && HasEffect && isEffectActive) {
                 isEffectActive = false;
                 actionButton.cooldownTimerText.color = Palette.EnabledColor;
                 OnEffectEnds();
             }
-        
+
             actionButton.SetCoolDown(Timer, (HasEffect && isEffectActive) ? EffectDuration : MaxTimer);
 
             if (hotkey.HasValue && Input.GetKeyDown(hotkey.Value)) onClickEvent();

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using LasMonjas.Patches;
 
@@ -28,7 +26,7 @@ namespace LasMonjas.Objects {
 
         public Nun(Vector2 p) {
             nun = new GameObject("Nun");
-            nun.AddSubmergedComponent(SubmergedCompatibility.Classes.ElevatorMover); 
+            nun.AddSubmergedComponent(SubmergedCompatibility.Classes.ElevatorMover);
             background = new GameObject("Background");
             background.transform.SetParent(nun.transform);
             if (PlayerControl.GameOptions.MapId == 5) {
@@ -39,7 +37,7 @@ namespace LasMonjas.Objects {
             }
             nun.transform.position = position;
             nun.transform.localPosition = position;
-            background.transform.localPosition = new Vector3(0 , 0, 0.2f); 
+            background.transform.localPosition = new Vector3(0 , 0, 0.2f);
 
             var nunRenderer = nun.AddComponent<SpriteRenderer>();
             nunRenderer.sprite = getNunSprite();

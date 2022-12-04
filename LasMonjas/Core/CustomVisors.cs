@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BepInEx;
-using BepInEx.IL2CPP;
+﻿using System.Collections.Generic;
 using HarmonyLib;
-using BepInEx.Logging;
 using UnityEngine;
 using System.Linq;
 

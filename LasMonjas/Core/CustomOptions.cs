@@ -7,7 +7,6 @@ using HarmonyLib;
 using Hazel;
 using System.Reflection;
 using System.Text;
-using static LasMonjas.LasMonjas;
 
 namespace LasMonjas.Core
 {
@@ -105,7 +104,7 @@ namespace LasMonjas.Core
                 stringOption.ValueText.text = selections[selection].ToString();
 
                 if (AmongUsClient.Instance?.AmHost == true && PlayerControl.LocalPlayer) {
-                    if (id == 0) switchPreset(selection); 
+                    if (id == 0) switchPreset(selection);
                     else if (entry != null) entry.Value = selection;
 
                     ShareOptionSelections();
@@ -118,7 +117,7 @@ namespace LasMonjas.Core
     class GameOptionsMenuStartPatch
     {
         public static void Postfix(GameOptionsMenu __instance) {
-            if (GameObject.Find("LasMonjasSettings") != null) { 
+            if (GameObject.Find("LasMonjasSettings") != null) {
                 GameObject.Find("LasMonjasSettings").transform.FindChild("GameGroup").FindChild("Text").GetComponent<TMPro.TextMeshPro>().SetText("Las Monjas - Settings");
                 return;
             }
@@ -142,7 +141,7 @@ namespace LasMonjas.Core
                 GameObject.Find("LasMonjasNeutrals").transform.FindChild("GameGroup").FindChild("Text").GetComponent<TMPro.TextMeshPro>().SetText("Las Monjas - Neutrals");
                 return;
             }
-            
+
             if (GameObject.Find("LasMonjasCrewmates") != null) {
                 GameObject.Find("LasMonjasCrewmates").transform.FindChild("GameGroup").FindChild("Text").GetComponent<TMPro.TextMeshPro>().SetText("Las Monjas - Crewmates");
                 return;
@@ -159,8 +158,8 @@ namespace LasMonjas.Core
 
             var lasMonjasGamemodes = UnityEngine.Object.Instantiate(gameSettings, gameSettings.transform.parent);
             var lasMonjasGamemodesMenu = lasMonjasGamemodes.transform.FindChild("GameGroup").FindChild("SliderInner").GetComponent<GameOptionsMenu>();
-            lasMonjasGamemodes.name = "LasMonjasGamemodes"; 
-            
+            lasMonjasGamemodes.name = "LasMonjasGamemodes";
+
             var lasMonjasImpostors = UnityEngine.Object.Instantiate(gameSettings, gameSettings.transform.parent);
             var lasMonjasImpostorsMenu = lasMonjasImpostors.transform.FindChild("GameGroup").FindChild("SliderInner").GetComponent<GameOptionsMenu>();
             lasMonjasImpostors.name = "LasMonjasImpostors";
@@ -168,15 +167,15 @@ namespace LasMonjas.Core
             var lasMonjasRebels = UnityEngine.Object.Instantiate(gameSettings, gameSettings.transform.parent);
             var lasMonjasRebelsMenu = lasMonjasRebels.transform.FindChild("GameGroup").FindChild("SliderInner").GetComponent<GameOptionsMenu>();
             lasMonjasRebels.name = "LasMonjasRebels";
-            
+
             var lasMonjasNeutrals = UnityEngine.Object.Instantiate(gameSettings, gameSettings.transform.parent);
             var lasMonjasNeutralsMenu = lasMonjasNeutrals.transform.FindChild("GameGroup").FindChild("SliderInner").GetComponent<GameOptionsMenu>();
             lasMonjasNeutrals.name = "LasMonjasNeutrals";
 
             var lasMonjasCrewmates = UnityEngine.Object.Instantiate(gameSettings, gameSettings.transform.parent);
             var lasMonjasCrewmatesMenu = lasMonjasCrewmates.transform.FindChild("GameGroup").FindChild("SliderInner").GetComponent<GameOptionsMenu>();
-            lasMonjasCrewmates.name = "LasMonjasCrewmates"; 
-            
+            lasMonjasCrewmates.name = "LasMonjasCrewmates";
+
             var roleTab = GameObject.Find("RoleTab");
             var gameTab = GameObject.Find("GameTab");
 
@@ -188,8 +187,8 @@ namespace LasMonjas.Core
             var lasMonjasGamemodeTab = UnityEngine.Object.Instantiate(roleTab, roleTab.transform.parent);
             var lasMonjasGamemodeTabHighlight = lasMonjasGamemodeTab.transform.FindChild("Hat Button").FindChild("Tab Background").GetComponent<SpriteRenderer>();
             lasMonjasGamemodeTab.transform.FindChild("Hat Button").FindChild("Icon").GetComponent<SpriteRenderer>().sprite = Helpers.loadSpriteFromResources("LasMonjas.Images.TabIconGamemodes.png", 100f);
-            lasMonjasGamemodeTab.name = "LasMonjasGamemodesTab"; 
-            
+            lasMonjasGamemodeTab.name = "LasMonjasGamemodesTab";
+
             var lasMonjasImpostorTab = UnityEngine.Object.Instantiate(roleTab, roleTab.transform.parent);
             var lasMonjasImpostorTabHighlight = lasMonjasImpostorTab.transform.FindChild("Hat Button").FindChild("Tab Background").GetComponent<SpriteRenderer>();
             lasMonjasImpostorTab.transform.FindChild("Hat Button").FindChild("Icon").GetComponent<SpriteRenderer>().sprite = Helpers.loadSpriteFromResources("LasMonjas.Images.TabIconImpostors.png", 100f);
@@ -198,8 +197,8 @@ namespace LasMonjas.Core
             var lasMonjasRebelTab = UnityEngine.Object.Instantiate(roleTab, roleTab.transform.parent);
             var lasMonjasRebelTabHighlight = lasMonjasRebelTab.transform.FindChild("Hat Button").FindChild("Tab Background").GetComponent<SpriteRenderer>();
             lasMonjasRebelTab.transform.FindChild("Hat Button").FindChild("Icon").GetComponent<SpriteRenderer>().sprite = Helpers.loadSpriteFromResources("LasMonjas.Images.TabIconRebels.png", 100f);
-            lasMonjasRebelTab.name = "LasMonjasRebelsTab"; 
-            
+            lasMonjasRebelTab.name = "LasMonjasRebelsTab";
+
             var lasMonjasNeutralTab = UnityEngine.Object.Instantiate(roleTab, roleTab.transform.parent);
             var lasMonjasNeutralTabHighlight = lasMonjasNeutralTab.transform.FindChild("Hat Button").FindChild("Tab Background").GetComponent<SpriteRenderer>();
             lasMonjasNeutralTab.transform.FindChild("Hat Button").FindChild("Icon").GetComponent<SpriteRenderer>().sprite = Helpers.loadSpriteFromResources("LasMonjas.Images.TabIconNeutrals.png", 100f);
@@ -234,7 +233,7 @@ namespace LasMonjas.Core
                     lasMonjasImpostors.gameObject.SetActive(false);
                     lasMonjasRebels.gameObject.SetActive(false);
                     lasMonjasNeutrals.gameObject.SetActive(false);
-                    lasMonjasCrewmates.gameObject.SetActive(false); 
+                    lasMonjasCrewmates.gameObject.SetActive(false);
                     gameSettingMenu.GameSettingsHightlight.enabled = false;
                     gameSettingMenu.RolesSettingsHightlight.enabled = false;
                     lasMonjasTabHighlight.enabled = false;
@@ -242,7 +241,7 @@ namespace LasMonjas.Core
                     lasMonjasImpostorTabHighlight.enabled = false;
                     lasMonjasRebelTabHighlight.enabled = false;
                     lasMonjasNeutralTabHighlight.enabled = false;
-                    lasMonjasCrewmateTabHighlight.enabled = false; 
+                    lasMonjasCrewmateTabHighlight.enabled = false;
                     if (copiedIndex == 0) {
                         gameSettingMenu.RegularGameSettings.SetActive(true);
                         gameSettingMenu.GameSettingsHightlight.enabled = true;
@@ -284,24 +283,24 @@ namespace LasMonjas.Core
 
             foreach (OptionBehaviour option in lasMonjasGamemodesMenu.GetComponentsInChildren<OptionBehaviour>())
                 UnityEngine.Object.Destroy(option.gameObject);
-            List<OptionBehaviour> lasMonjasGamemodesOptions = new List<OptionBehaviour>(); 
-            
+            List<OptionBehaviour> lasMonjasGamemodesOptions = new List<OptionBehaviour>();
+
             foreach (OptionBehaviour option in lasMonjasImpostorsMenu.GetComponentsInChildren<OptionBehaviour>())
                 UnityEngine.Object.Destroy(option.gameObject);
             List<OptionBehaviour> lasMonjasImpostorOptions = new List<OptionBehaviour>();
 
             foreach (OptionBehaviour option in lasMonjasRebelsMenu.GetComponentsInChildren<OptionBehaviour>())
                 UnityEngine.Object.Destroy(option.gameObject);
-            List<OptionBehaviour> lasMonjasRebelOptions = new List<OptionBehaviour>(); 
-            
+            List<OptionBehaviour> lasMonjasRebelOptions = new List<OptionBehaviour>();
+
             foreach (OptionBehaviour option in lasMonjasNeutralsMenu.GetComponentsInChildren<OptionBehaviour>())
                 UnityEngine.Object.Destroy(option.gameObject);
             List<OptionBehaviour> lasMonjasNeutralOptions = new List<OptionBehaviour>();
 
             foreach (OptionBehaviour option in lasMonjasCrewmatesMenu.GetComponentsInChildren<OptionBehaviour>())
                 UnityEngine.Object.Destroy(option.gameObject);
-            List<OptionBehaviour> lasMonjasCrewmateOptions = new List<OptionBehaviour>(); 
-            
+            List<OptionBehaviour> lasMonjasCrewmateOptions = new List<OptionBehaviour>();
+
             for (int i = 0; i < CustomOption.options.Count; i++) {
                 CustomOption option = CustomOption.options[i];
                 if (option.optionBehaviour == null) {
@@ -344,14 +343,14 @@ namespace LasMonjas.Core
             lasMonjasSettings.gameObject.SetActive(false);
 
             lasMonjasGamemodesMenu.Children = lasMonjasGamemodesOptions.ToArray();
-            lasMonjasGamemodes.gameObject.SetActive(false); 
-            
+            lasMonjasGamemodes.gameObject.SetActive(false);
+
             lasMonjasImpostorsMenu.Children = lasMonjasImpostorOptions.ToArray();
             lasMonjasImpostors.gameObject.SetActive(false);
 
             lasMonjasRebelsMenu.Children = lasMonjasRebelOptions.ToArray();
-            lasMonjasRebels.gameObject.SetActive(false); 
-            
+            lasMonjasRebels.gameObject.SetActive(false);
+
             lasMonjasNeutralsMenu.Children = lasMonjasNeutralOptions.ToArray();
             lasMonjasNeutrals.gameObject.SetActive(false);
 
@@ -434,7 +433,7 @@ namespace LasMonjas.Core
                 if (GameObject.Find("LasMonjasNeutrals") && option.type != "neutral")
                     continue;
                 if (GameObject.Find("LasMonjasCrewmates") && option.type != "crewmate")
-                    continue; 
+                    continue;
                 if (option?.optionBehaviour != null && option.optionBehaviour.gameObject != null) {
                     bool enabled = true;
                     var parent = option.parent;

@@ -1,12 +1,8 @@
-  using HarmonyLib;
+using HarmonyLib;
 using static LasMonjas.LasMonjas;
-using static LasMonjas.GameHistory;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Hazel;
-using Il2CppInterop;
 using System;
 using System.Text;
 
@@ -44,7 +40,7 @@ namespace LasMonjas.Patches {
         YellowTeamHillWin = 39,
         HotPotatoEnd = 40,
         ZombieWin = 41,
-        SurvivorWin = 42,               
+        SurvivorWin = 42,
         BattleRoyaleSoloWin = 43,
         BattleRoyaleTimeWin = 44,
         BattleRoyaleDraw = 45,
@@ -88,7 +84,7 @@ namespace LasMonjas.Patches {
         YellowTeamHillWin,
         HotPotatoEnd,
         ZombieWin,
-        SurvivorWin,       
+        SurvivorWin,
         BattleRoyaleSoloWin,
         BattleRoyaleTimeWin,
         BattleRoyaleDraw,
@@ -158,10 +154,10 @@ namespace LasMonjas.Patches {
             if (TreasureHunter.treasureHunter != null) notWinners.Add(TreasureHunter.treasureHunter);
             if (Devourer.devourer != null) notWinners.Add(Devourer.devourer);
             if (Poisoner.poisoner != null) notWinners.Add(Poisoner.poisoner);
-            if (Puppeteer.puppeteer != null) notWinners.Add(Puppeteer.puppeteer); 
-            if (Exiler.exiler != null) notWinners.Add(Exiler.exiler);           
-            if (Amnesiac.amnesiac != null) notWinners.Add(Amnesiac.amnesiac);           
-            if (Seeker.seeker != null) notWinners.Add(Seeker.seeker);           
+            if (Puppeteer.puppeteer != null) notWinners.Add(Puppeteer.puppeteer);
+            if (Exiler.exiler != null) notWinners.Add(Exiler.exiler);
+            if (Amnesiac.amnesiac != null) notWinners.Add(Amnesiac.amnesiac);
+            if (Seeker.seeker != null) notWinners.Add(Seeker.seeker);
 
             // Remove neutral custom gamemode roles from winners
             if (CaptureTheFlag.stealerPlayer != null) notWinners.Add(CaptureTheFlag.stealerPlayer);
@@ -258,7 +254,7 @@ namespace LasMonjas.Patches {
                     AdditionalTempData.winCondition = WinCondition.LoversSoloWin;
                 }
             }
-            
+
             // TaskMaster crew win
             else if (taskMasterCrewWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -301,7 +297,7 @@ namespace LasMonjas.Patches {
                 TempData.winners.Add(wpd);
                 AdditionalTempData.winCondition = WinCondition.DevourerWin;
             }
-            
+
             // Poisoner win
             else if (poisonerWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -324,8 +320,8 @@ namespace LasMonjas.Patches {
                 WinningPlayerData wpd = new WinningPlayerData(Exiler.exiler.Data);
                 TempData.winners.Add(wpd);
                 AdditionalTempData.winCondition = WinCondition.ExilerWin;
-            }       
-            
+            }
+
             // Seeker win
             else if (seekerWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -357,12 +353,12 @@ namespace LasMonjas.Patches {
 
             // BountyHunter win
             else if (bountyhunterWin) {
-                // BountyHunter wins if he kills his target 
+                // BountyHunter wins if he kills his target
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
                 WinningPlayerData wpd = new WinningPlayerData(BountyHunter.bountyhunter.Data);
                 TempData.winners.Add(wpd);
                 AdditionalTempData.winCondition = WinCondition.BountyHunterWin;
-            }            
+            }
 
             // Trapper win
             else if (trapperWin) {
@@ -406,7 +402,7 @@ namespace LasMonjas.Patches {
                 TempData.winners.Add(wpd);
                 AdditionalTempData.winCondition = WinCondition.BerserkerWin;
             }
-            
+
             // Yandere win
             else if (yandereWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -414,7 +410,7 @@ namespace LasMonjas.Patches {
                 TempData.winners.Add(wpd);
                 AdditionalTempData.winCondition = WinCondition.YandereWin;
             }
-            
+
             // Stranded win
             else if (strandedWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -422,7 +418,7 @@ namespace LasMonjas.Patches {
                 TempData.winners.Add(wpd);
                 AdditionalTempData.winCondition = WinCondition.StrandedWin;
             }
-            
+
             // Monja win
             else if (monjaWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -536,7 +532,7 @@ namespace LasMonjas.Patches {
                 }
                 AdditionalTempData.winCondition = WinCondition.SurvivorWin;
             }
-            
+
             // BattleRoyale Win
             else if (battleRoyaleSoloWin) {
                 TempData.winners = new Il2CppSystem.Collections.Generic.List<WinningPlayerData>();
@@ -601,7 +597,7 @@ namespace LasMonjas.Patches {
                     WinningPlayerData wpd = new WinningPlayerData(player.Data);
                     TempData.winners.Add(wpd);
                 }
-                AdditionalTempData.winCondition = WinCondition.BattleRoyaleDraw; 
+                AdditionalTempData.winCondition = WinCondition.BattleRoyaleDraw;
             }
 
             // Reset Settings
@@ -631,7 +627,7 @@ namespace LasMonjas.Patches {
                     textRenderer.color = Bomberman.color;
                     __instance.BackgroundBar.material.SetColor("_Color", Bomberman.color);
                     Helpers.playEndMusic(6);
-                    break;               
+                    break;
                 case WinCondition.LoversTeamWin:
                     textRenderer.text = "Lovers and Crewmates Win";
                     textRenderer.color = Modifiers.loverscolor;
@@ -838,7 +834,7 @@ namespace LasMonjas.Patches {
                 default:
                     Helpers.playEndMusic(5);
                     break;
-            }              
+            }
 
             if (MapOptions.showRoleSummary) {
                 var position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f, Camera.main.nearClipPlane));
@@ -868,11 +864,11 @@ namespace LasMonjas.Patches {
         }
     }
 
-    [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.CheckEndCriteria))] 
+    [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.CheckEndCriteria))]
     class CheckEndCriteriaPatch {
         public static bool Prefix(ShipStatus __instance) {
             if (!GameData.Instance) return false;
-            if (DestroyableSingleton<TutorialManager>.InstanceExists) 
+            if (DestroyableSingleton<TutorialManager>.InstanceExists)
                 return true;
             var statistics = new PlayerStatistics(__instance);
             if (CheckAndEndGameForBombExploded(__instance)) return false;
@@ -917,7 +913,7 @@ namespace LasMonjas.Patches {
             if (CheckAndEndGameForBattleRoyaleDraw(__instance)) return false;
             if (CheckAndEndGameForBattleRoyaleLimeTeamWin(__instance)) return false;
             if (CheckAndEndGameForBattleRoyalePinkTeamWin(__instance)) return false;
-            if (CheckAndEndGameForBattleRoyaleSerialKillerWin(__instance)) return false; 
+            if (CheckAndEndGameForBattleRoyaleSerialKillerWin(__instance)) return false;
             return false;
         }
 
@@ -993,7 +989,7 @@ namespace LasMonjas.Patches {
             }
             return false;
         }
-       
+
         private static bool CheckAndEndGameForExilerWin(ShipStatus __instance) {
             if (Exiler.triggerExilerWin) {
                 __instance.enabled = false;
@@ -1017,7 +1013,7 @@ namespace LasMonjas.Patches {
                 return true;
             }
             return false;
-        }           
+        }
         private static bool CheckAndEndGameForRenegadeWin(ShipStatus __instance, PlayerStatistics statistics) {
             if (statistics.TeamRenegadeAlive >= statistics.TotalAlive - statistics.TeamRenegadeAlive + statistics.TeamCaptainAlive && statistics.TeamImpostorsAlive == 0 && statistics.TeamCaptainAlive != statistics.TeamRenegadeAlive && !(statistics.TeamRenegadeHasAliveLover && statistics.TeamLoversAlive == 2)) {
                 __instance.enabled = false;
@@ -1073,14 +1069,14 @@ namespace LasMonjas.Patches {
                 return true;
             }
             return false;
-        }        
+        }
         private static bool CheckAndEndGameForYandereWin(ShipStatus __instance, PlayerStatistics statistics) {
             if (Yandere.triggerYandereWin && !Yandere.rampageMode) {
                 __instance.enabled = false;
                 ShipStatus.RpcEndGame((GameOverReason)CustomGameOverReason.YandereWin, false);
                 return true;
             }
-            
+
             if (Yandere.rampageMode && statistics.TeamYandereAlive >= statistics.TotalAlive - statistics.TeamYandereAlive && statistics.TeamImpostorsAlive == 0 && statistics.TeamCaptainAlive == 0 && !(statistics.TeamImpostorHasAliveLover && statistics.TeamLoversAlive == 2)) {
                 __instance.enabled = false;
                 ShipStatus.RpcEndGame((GameOverReason)CustomGameOverReason.YandereWin, false);
@@ -1198,7 +1194,7 @@ namespace LasMonjas.Patches {
                 return true;
             }
             return false;
-        }        
+        }
         private static bool CheckAndEndGameForThiefModeThiefWin(ShipStatus __instance) {
             if (PoliceAndThief.triggerThiefWin) {
                 __instance.enabled = false;
@@ -1238,7 +1234,7 @@ namespace LasMonjas.Patches {
                 return true;
             }
             return false;
-        }        
+        }
         private static bool CheckAndEndGameForHotPotatoEnd(ShipStatus __instance) {
             if (HotPotato.triggerHotPotatoEnd) {
                 __instance.enabled = false;
@@ -1310,7 +1306,7 @@ namespace LasMonjas.Patches {
                 return true;
             }
             return false;
-        }       
+        }
     }
 
     internal class PlayerStatistics
@@ -1384,7 +1380,7 @@ namespace LasMonjas.Patches {
                         }
                         if (Trapper.trapper != null && Trapper.trapper.PlayerId == playerInfo.PlayerId) {
                             numTrapperAlive++;
-                        }                       
+                        }
                         if (Yinyanger.yinyanger != null && Yinyanger.yinyanger.PlayerId == playerInfo.PlayerId) {
                             numYinyangerAlive++;
                         }

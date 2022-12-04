@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.Linq;
-using static LasMonjas.HudManagerStartPatch;
 using Hazel;
 using LasMonjas.Patches;
 using LasMonjas.Core;
@@ -85,7 +82,7 @@ namespace LasMonjas.Objects
                 engineerTrap.gameObject.SetActive(false);
             }
 
-            engineerTraps.Add(this);            
+            engineerTraps.Add(this);
         }
 
         public static void clearTraps() {

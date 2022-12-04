@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.Linq;
-using static LasMonjas.HudManagerStartPatch;
-using Hazel;
 using LasMonjas.Patches;
 
 namespace LasMonjas.Objects
@@ -12,8 +8,8 @@ namespace LasMonjas.Objects
     class MonjaCuloDio
     {
         public static List<MonjaCuloDio> monjaculodios = new List<MonjaCuloDio>();
-        private static Sprite monjasprite; 
-        private static Sprite culosprite; 
+        private static Sprite monjasprite;
+        private static Sprite culosprite;
         private static Sprite diosprite;
         private Color color;
         private GameObject monjaculodio;
@@ -57,7 +53,7 @@ namespace LasMonjas.Objects
                 case 3:
                     spriteRenderer.sprite = getDioSprite();
                     break;
-            }           
+            }
             spriteRenderer.color = color;
 
             monjaculodio.SetActive(true);

@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Collections;
-using Il2CppInterop;
 using UnityEngine;
 using System.Linq;
 using static LasMonjas.LasMonjas;
@@ -53,10 +51,10 @@ namespace LasMonjas
         }
 
         public static Texture2D loadTextureFromDisk(string path) {
-            try {          
+            try {
                 if (File.Exists(path))     {
                     Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, true);
-                    var byteTexture = Il2CppSystem.IO.File.ReadAllBytes(path); 
+                    var byteTexture = Il2CppSystem.IO.File.ReadAllBytes(path);
                     ImageConversion.LoadImage(texture, byteTexture, false);
                     return texture;
                 }
@@ -73,7 +71,7 @@ namespace LasMonjas
                     return player;
             return null;
         }
-        
+
         public static Dictionary<byte, PlayerControl> allPlayersById()
         {
             Dictionary<byte, PlayerControl> res = new Dictionary<byte, PlayerControl>();
@@ -95,7 +93,7 @@ namespace LasMonjas
         public static void refreshRoleDescription(PlayerControl player) {
             if (player == null) return;
 
-            List<RoleInfo> infos = RoleInfo.getRoleInfoForPlayer(player); 
+            List<RoleInfo> infos = RoleInfo.getRoleInfoForPlayer(player);
 
             var toRemove = new List<PlayerTask>();
             foreach (PlayerTask t in player.myTasks) {
@@ -107,7 +105,7 @@ namespace LasMonjas
                     else
                         toRemove.Add(t); // TextTask does not have a corresponding RoleInfo and will hence be deleted
                 }
-            }   
+            }
 
             foreach (PlayerTask t in toRemove) {
                 t.OnRemove();
@@ -122,9 +120,9 @@ namespace LasMonjas
 
                 if (roleInfo.name == "Renegade") {
                     var getMinionText = Renegade.canRecruitMinion ? Language.helpersTexts[0] : "";
-                    task.Text = cs(roleInfo.color, $"{roleInfo.name}: {Language.helpersTexts[1]}{getMinionText}");  
+                    task.Text = cs(roleInfo.color, $"{roleInfo.name}: {Language.helpersTexts[1]}{getMinionText}");
                 } else {
-                    task.Text = cs(roleInfo.color, $"{roleInfo.name}: {roleInfo.shortDescription}");  
+                    task.Text = cs(roleInfo.color, $"{roleInfo.name}: {roleInfo.shortDescription}");
                 }
 
                 player.myTasks.Insert(0, task);
@@ -157,7 +155,7 @@ namespace LasMonjas
                 UnityEngine.Object.Destroy(playerTask.gameObject);
             }
             player.myTasks.Clear();
-            
+
             if (player.Data != null && player.Data.Tasks != null)
                 player.Data.Tasks.Clear();
         }
@@ -204,7 +202,7 @@ namespace LasMonjas
             if (source == null || target == null) return true;
             if (source.Data.IsDead) return false;
             if (target.Data.IsDead) return true;
-            if (Painter.painterTimer > 0f) return true; // No names are visible          
+            if (Painter.painterTimer > 0f) return true; // No names are visible
             if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started && ShipStatus.Instance != null && source.transform != null && target.transform != null) {
                 float distMod = 1.025f;
                 float distance = Vector3.Distance(source.transform.position, target.transform.position);
@@ -217,7 +215,7 @@ namespace LasMonjas
             if (source.getPartner() == target) return false; // Members of team Lovers see the names of each other
             if ((source == Renegade.renegade || source == Minion.minion) && (target == Renegade.renegade || target == Minion.minion || target == Renegade.fakeMinion)) return false; // Members of team Renegade see the names of each other
             return true;
-        }      
+        }
 
         public static void setDefaultLook(this PlayerControl target) {
             target.setLook(target.Data.PlayerName, target.Data.DefaultOutfit.ColorId, target.Data.DefaultOutfit.HatId, target.Data.DefaultOutfit.VisorId, target.Data.DefaultOutfit.SkinId, target.Data.DefaultOutfit.PetId);

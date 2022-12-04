@@ -1,6 +1,4 @@
 using HarmonyLib;
-using static LasMonjas.LasMonjas;
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -39,7 +37,7 @@ namespace LasMonjas
                 for (int i = 0; i < __instance.AllPlayers.Count; i++) {
                     GameData.PlayerInfo playerInfo = __instance.AllPlayers[i];
                     if (playerInfo.Object
-                    && playerInfo.Object.hasAliveKillingLover()) // Tasks do not count if a Crewmate has an alive killing Lover                                        
+                    && playerInfo.Object.hasAliveKillingLover()) // Tasks do not count if a Crewmate has an alive killing Lover
                         continue;
                     var (playerCompleted, playerTotal) = taskInfo(playerInfo);
                     __instance.TotalTasks += playerTotal;
@@ -85,9 +83,9 @@ namespace LasMonjas
         private static class GameDataCompleteTaskPatch
         {
             private static void Postfix(GameData __instance, [HarmonyArgument(0)] PlayerControl pc, [HarmonyArgument(1)] uint taskId) {
-                
+
                 if (TaskMaster.taskMaster != null && TaskMaster.taskMaster == PlayerControl.LocalPlayer && !TaskMaster.taskMaster.Data.IsDead) {
-                    
+
                     var (playerCompleted, playerTotal) = taskInfo(TaskMaster.taskMaster.Data);
                     int numberOfLeftTasks = playerTotal - playerCompleted;
 
@@ -106,7 +104,7 @@ namespace LasMonjas
                             writer.Write(taskTypeIds);
                             AmongUsClient.Instance.FinishRpcImmediately(writer);
                             RPCProcedure.taskMasterSetExTasks(TaskMaster.taskMaster.PlayerId, byte.MaxValue, taskTypeIds);
-                        }                       
+                        }
                     }
                 }
             }

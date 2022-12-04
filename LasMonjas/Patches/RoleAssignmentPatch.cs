@@ -2,7 +2,6 @@
 using Hazel;
 using System.Collections.Generic;
 using System.Linq;
-using Il2CppInterop;
 using UnityEngine;
 using System;
 using static LasMonjas.LasMonjas;
@@ -185,11 +184,11 @@ namespace LasMonjas.Patches
                 // Add modifiers after selecting the roles
                 if (CustomOptionHolder.activateModifiers.getSelection() == 1) {
                     assignModifiers();
-                }               
+                }
             }
             else {
                 if (CaptureTheFlag.captureTheFlagMode) {
-                    // Capture the flag    
+                    // Capture the flag
                     myGamemodeList.Clear();
                     bool oddNumber = false;
                     if (Mathf.Ceil(PlayerControl.AllPlayerControls.Count) % 2 != 0) {
@@ -254,7 +253,7 @@ namespace LasMonjas.Patches
                     }
                 }
                 else if (PoliceAndThief.policeAndThiefMode) {
-                    // Police and Thief    
+                    // Police and Thief
                     myGamemodeList.Clear();
                     int mypolice = 1;
                     while (myGamemodeList.Count < (Mathf.Round(PlayerControl.AllPlayerControls.Count / 2.39f))) {
@@ -317,7 +316,7 @@ namespace LasMonjas.Patches
                     }
                 }
                 else if (KingOfTheHill.kingOfTheHillMode) {
-                    // King of the hill    
+                    // King of the hill
                     myGamemodeList.Clear();
                     bool oddNumber = false;
                     if (Mathf.Ceil(PlayerControl.AllPlayerControls.Count) % 2 != 0) {
@@ -382,7 +381,7 @@ namespace LasMonjas.Patches
                     }
                 }
                 else if (HotPotato.hotPotatoMode) {
-                    // Hot Potato   
+                    // Hot Potato
                     myGamemodeList.Clear();
                     int mypotato = 1;
                     while (myGamemodeList.Count < PlayerControl.AllPlayerControls.Count) {
@@ -694,7 +693,7 @@ namespace LasMonjas.Patches
                     }
                 }
                 else if (BattleRoyale.battleRoyaleMode) {
-                    // Battle Royale   
+                    // Battle Royale
                     myGamemodeList.Clear();
                     if (BattleRoyale.matchType == 0) {
                         int myBattle = 1;
@@ -751,7 +750,7 @@ namespace LasMonjas.Patches
                         }
                     }
                     else {
-                        // Battle Royale Teams   
+                        // Battle Royale Teams
                         myGamemodeList.Clear();
                         bool oddNumber = false;
                         if (Mathf.Ceil(PlayerControl.AllPlayerControls.Count) % 2 != 0) {
@@ -864,9 +863,9 @@ namespace LasMonjas.Patches
             assignModifiersToPlayers(ensuredModifiers, players, modifierCount); // Assign ensured modifier
 
             modifierCount -= ensuredModifiers.Count;
-            if (modifierCount <= 0) return;            
+            if (modifierCount <= 0) return;
         }
-        
+
         private static byte setRoleToRandomPlayer(byte roleId, List<PlayerControl> playerList, bool removePlayer = true) {
             var index = rnd.Next(0, playerList.Count);
             byte playerId = playerList[index].PlayerId;
@@ -884,13 +883,13 @@ namespace LasMonjas.Patches
             int selection = 0;
             switch (roleId) {
                 case RoleId.Lover:
-                    selection = CustomOptionHolder.loverPlayer.getSelection(); 
+                    selection = CustomOptionHolder.loverPlayer.getSelection();
                     break;
                 case RoleId.Lighter:
-                    selection = CustomOptionHolder.lighterPlayer.getSelection(); 
+                    selection = CustomOptionHolder.lighterPlayer.getSelection();
                     break;
                 case RoleId.Blind:
-                    selection = CustomOptionHolder.blindPlayer.getSelection(); 
+                    selection = CustomOptionHolder.blindPlayer.getSelection();
                     break;
                 case RoleId.Flash:
                     selection = CustomOptionHolder.flashPlayer.getSelection();
@@ -933,7 +932,7 @@ namespace LasMonjas.Patches
                 playerList.RemoveAll(x => x.PlayerId == playerId);
             }
         }
-        
+
         private static byte setModifierToRandomPlayer(byte modifierId, List<PlayerControl> playerList, byte flag = 0) {
             var index = rnd.Next(0, playerList.Count);
             byte playerId = playerList[index].PlayerId;

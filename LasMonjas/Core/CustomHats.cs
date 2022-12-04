@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BepInEx;
-using BepInEx.IL2CPP;
+﻿using System.Collections.Generic;
 using HarmonyLib;
-using BepInEx.Logging;
 using UnityEngine;
 using System.Linq;
 
@@ -192,7 +187,7 @@ namespace LasMonjas.Core
                                     allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null, false, false));
                                 }
                             }
-                            
+
                         }
                         IdToData.Add(HatManager.Instance.allHats.Count + HatID, data);
 

@@ -2,8 +2,6 @@
 using LasMonjas.Core;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.UI.Button;
-using Object = UnityEngine.Object;
 
 namespace LasMonjas.Patches
 {
@@ -23,7 +21,7 @@ namespace LasMonjas.Patches
             var discordButton = UnityEngine.Object.Instantiate(exitButton, exitButton.transform.parent);
             discordButton.name = "LMJDiscordButton";
             discordButton.transform.position = new Vector3(exitButton.transform.position.x, exitButton.transform.position.y + 0.6f, exitButton.transform.position.z);
-            
+
             SpriteRenderer discordButtonSprite = discordButton.GetComponent<SpriteRenderer>();
 
             var discordButtonText = discordButton.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();

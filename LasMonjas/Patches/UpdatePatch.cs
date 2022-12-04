@@ -1,7 +1,5 @@
 using HarmonyLib;
 using System;
-using System.IO;
-using System.Net.Http;
 using UnityEngine;
 using static LasMonjas.LasMonjas;
 using LasMonjas.Objects;
@@ -9,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Hazel;
 using static LasMonjas.RoleInfo;
-using Reactor;
 using static LasMonjas.MapOptions;
 using LasMonjas.Core;
 using static LasMonjas.HudManagerStartPatch;
@@ -416,7 +413,7 @@ namespace LasMonjas.Patches {
                     }
                 }
             }
-            
+
             // Battle Royale Lifes
             if (BattleRoyale.battleRoyaleMode && howmanygamemodesareon == 1) {
                 if (BattleRoyale.matchType == 0) {
@@ -821,13 +818,13 @@ namespace LasMonjas.Patches {
             }
             if (Hacker.hacker != null) {
                 Hacker.hackerTimer -= deltaTime;
-            }    
+            }
             if (Sleuth.sleuth != null) {
                 Sleuth.corpsesPathfindTimer -= deltaTime;
-            }            
+            }
             if (Fink.fink != null) {
                 Fink.finkTimer -= deltaTime;
-            }         
+            }
             if (Bat.bat != null) {
                 Bat.frequencyTimer -= deltaTime;
             }
@@ -1188,7 +1185,7 @@ namespace LasMonjas.Patches {
                         }
                         else if (Challenger.challengerPaper && Challenger.rivalRock) {
                             Challenger.challenger.MurderPlayer(Challenger.rivalPlayer);
-                            Challenger.duelKills += 1; 
+                            Challenger.duelKills += 1;
                             SoundManager.Instance.PlaySound(CustomMain.customAssets.challengerDuelKillClip, false, 5f);
                             whoDied = 2;
                         }
@@ -1199,7 +1196,7 @@ namespace LasMonjas.Patches {
                         }
                         else if (Challenger.challengerScissors && Challenger.rivalPaper) {
                             Challenger.challenger.MurderPlayer(Challenger.rivalPlayer);
-                            Challenger.duelKills += 1; 
+                            Challenger.duelKills += 1;
                             SoundManager.Instance.PlaySound(CustomMain.customAssets.challengerDuelKillClip, false, 5f);
                             whoDied = 2;
                         }
@@ -1232,7 +1229,7 @@ namespace LasMonjas.Patches {
                         if ((Challenger.challengerRock || Challenger.challengerPaper || Challenger.challengerScissors) && (!Challenger.rivalRock && !Challenger.rivalPaper && !Challenger.rivalScissors)) {
                             Challenger.challenger.MurderPlayer(Challenger.rivalPlayer);
                             SoundManager.Instance.PlaySound(CustomMain.customAssets.challengerDuelKillClip, false, 5f);
-                            Challenger.duelKills += 1; 
+                            Challenger.duelKills += 1;
                             whoDied = 2;
                         }
                         else if ((!Challenger.challengerRock && !Challenger.challengerPaper && !Challenger.challengerScissors) && (Challenger.rivalRock || Challenger.rivalPaper || Challenger.rivalScissors)) {
@@ -1283,50 +1280,50 @@ namespace LasMonjas.Patches {
 
             HudManager.Instance.StartCoroutine(Effects.Lerp(7, new Action<float>((p) => {
 
-                if (p == 1f) {                    
+                if (p == 1f) {
 
                     // If after the duel both are dead, teleport their body to the emergency button
                     if (Challenger.challenger.Data.IsDead && Challenger.rivalPlayer.Data.IsDead) {
                         var bodyChallenger = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Challenger.challenger.PlayerId);
-                        challengerTeleportBodies(bodyChallenger);                        
+                        challengerTeleportBodies(bodyChallenger);
                         var bodyRival = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Challenger.rivalPlayer.PlayerId);
-                        challengerTeleportBodies(bodyRival);                        
+                        challengerTeleportBodies(bodyRival);
                         // If after the duel one of them was a lover, teleport the other lover body too
                         if (Modifiers.lover1 != null && (Challenger.rivalPlayer.PlayerId == Modifiers.lover1.PlayerId || Challenger.challenger.PlayerId == Modifiers.lover1.PlayerId)) {
                             var bodyLover2 = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Modifiers.lover2.PlayerId);
-                            challengerTeleportBodies(bodyLover2);                            
+                            challengerTeleportBodies(bodyLover2);
                         }
                         else if (Modifiers.lover2 != null && (Challenger.rivalPlayer.PlayerId == Modifiers.lover2.PlayerId || Challenger.challenger.PlayerId == Modifiers.lover2.PlayerId)) {
                             var bodyLover1 = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Modifiers.lover1.PlayerId);
-                            challengerTeleportBodies(bodyLover1);                            
+                            challengerTeleportBodies(bodyLover1);
                         }
                     }
                     // If after the duel the challenger is dead, teleport his body to the player location
                     else if (Challenger.challenger.Data.IsDead) {
                         var bodyC = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Challenger.challenger.PlayerId);
-                        challengerTeleportBodies(bodyC);                        
+                        challengerTeleportBodies(bodyC);
                         // If after the duel one of them was a lover, teleport the other lover body too
                         if (Modifiers.lover1 != null && Challenger.challenger.PlayerId == Modifiers.lover1.PlayerId) {
                             var bodyLover2 = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Modifiers.lover2.PlayerId);
-                            challengerTeleportBodies(bodyLover2);                            
+                            challengerTeleportBodies(bodyLover2);
                         }
                         else if (Modifiers.lover2 != null && Challenger.challenger.PlayerId == Modifiers.lover2.PlayerId) {
                             var bodyLover1 = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Modifiers.lover1.PlayerId);
-                            challengerTeleportBodies(bodyLover1);                            
+                            challengerTeleportBodies(bodyLover1);
                         }
                     }
                     // If after the duel the rival is dead, teleport his body to the player location
                     else if (Challenger.rivalPlayer.Data.IsDead) {
                         var bodyR = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Challenger.rivalPlayer.PlayerId);
-                        challengerTeleportBodies(bodyR);                        
+                        challengerTeleportBodies(bodyR);
                         // If after the duel one of them was a lover, teleport the other lover body too
                         if (Modifiers.lover1 != null && Challenger.rivalPlayer.PlayerId == Modifiers.lover1.PlayerId) {
                             var bodyLover2 = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Modifiers.lover2.PlayerId);
-                            challengerTeleportBodies(bodyLover2);                            
+                            challengerTeleportBodies(bodyLover2);
                         }
                         else if (Modifiers.lover2 != null && Challenger.rivalPlayer.PlayerId == Modifiers.lover2.PlayerId) {
                             var bodyLover1 = UnityEngine.Object.FindObjectsOfType<DeadBody>().FirstOrDefault(b => b.ParentId == Modifiers.lover1.PlayerId);
-                            challengerTeleportBodies(bodyLover1);                            
+                            challengerTeleportBodies(bodyLover1);
                         }
                     }
                 }
@@ -1351,10 +1348,10 @@ namespace LasMonjas.Patches {
                     Challenger.ResetValues();
                 }
             })));
-        }        
-        
+        }
+
         static void challengerTeleportBodies(DeadBody body) {
-            
+
             GameObject emerButton = null;
 
             switch (PlayerControl.GameOptions.MapId) {
@@ -1377,7 +1374,7 @@ namespace LasMonjas.Patches {
                     emerButton = GameObject.Find("console-mr-callmeeting");
                     break;
             }
-            
+
             if (PlayerControl.GameOptions.MapId == 5) {
                 if (body.transform.position.y > 0) {
                     body.transform.position = new Vector3(5f, 19.5f, -5);
@@ -1413,7 +1410,7 @@ namespace LasMonjas.Patches {
                 }
             }
         }
-        
+
         static void exilerWinIfDisconnect() {
             if (Exiler.exiler == null) return;
 
@@ -1445,7 +1442,7 @@ namespace LasMonjas.Patches {
             }
 
             while (Seeker.howmanyselectedattacks < Seeker.currentPlayers + 1)
-                return;          
+                return;
 
             if (Seeker.onlyOneFinishMinigame && !Seeker.timeOutMinigame) {
                 Seeker.onlyOneFinishMinigame = false;
@@ -1464,7 +1461,7 @@ namespace LasMonjas.Patches {
                 case 3:
                     new MonjaCuloDio(3, Seeker.seeker, 3);
                     break;
-            }            
+            }
 
             if (timeOut == 0) {
                 HudManager.Instance.StartCoroutine(Effects.Lerp(3, new Action<float>((p) => {
@@ -1496,7 +1493,7 @@ namespace LasMonjas.Patches {
                                     break;
                             }
                         }
-                        
+
                         if (Seeker.hidedPlayerOne != null && Seeker.seekerSelectedHiding == Seeker.hidedPlayerOneSelectedHiding) {
                             Seeker.currentPoints += 1;
                         }
@@ -1507,7 +1504,7 @@ namespace LasMonjas.Patches {
                             Seeker.currentPoints += 1;
                         }
                         Seeker.seekerPlayerPointsCount.text = $"{Seeker.currentPlayers} / 3";
-                        Seeker.seekerPerformMinigamePlayerPointsCount.text = $"{Seeker.currentPoints} / {Seeker.neededPoints}"; 
+                        Seeker.seekerPerformMinigamePlayerPointsCount.text = $"{Seeker.currentPoints} / {Seeker.neededPoints}";
                         new CustomMessage(Language.statusRolesTexts[4] + Seeker.currentPoints, 3, -1, 1.6f, 29);
                     }
                 })));
@@ -1544,7 +1541,7 @@ namespace LasMonjas.Patches {
                                         break;
                                 }
                             }
-                            
+
                             if (Seeker.hidedPlayerOne != null && Seeker.seekerSelectedHiding == Seeker.hidedPlayerOneSelectedHiding) {
                                 Seeker.currentPoints += 1;
                             }
@@ -1565,7 +1562,7 @@ namespace LasMonjas.Patches {
                             }
                         }
                         Seeker.seekerPlayerPointsCount.text = $"{Seeker.currentPlayers} / 3";
-                        Seeker.seekerPerformMinigamePlayerPointsCount.text = $"{Seeker.currentPoints} / {Seeker.neededPoints}"; 
+                        Seeker.seekerPerformMinigamePlayerPointsCount.text = $"{Seeker.currentPoints} / {Seeker.neededPoints}";
                         new CustomMessage(Language.statusRolesTexts[4] + Seeker.currentPoints, 3, -1, 1.6f, 29);
                     }
                 })));
@@ -1640,8 +1637,8 @@ namespace LasMonjas.Patches {
                     }
                 }
             })));
-        }              
-        
+        }
+
         static void fortuneTellerUpdate() {
             if (FortuneTeller.fortuneTeller == null || FortuneTeller.fortuneTeller != PlayerControl.LocalPlayer) return;
 
@@ -1671,7 +1668,7 @@ namespace LasMonjas.Patches {
                     }
                 }
             }
-        }       
+        }
         public static void kidUpdate() {
             foreach (PlayerControl p in PlayerControl.AllPlayerControls) {
                 if (p == null) continue;
@@ -1702,7 +1699,7 @@ namespace LasMonjas.Patches {
                 else
                     p.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
             }
-        }      
+        }
         static void spiritualistUpdate() {
 
             if (PlayerControl.LocalPlayer == Spiritualist.spiritualist && Spiritualist.spiritualist != null) {
@@ -1722,7 +1719,7 @@ namespace LasMonjas.Patches {
                     Spiritualist.spiritualist.cosmetics.nameText.color = Spiritualist.color;
                 }
             }
-        }      
+        }
         static void vigilantMiraUpdate() {
 
             if (Vigilant.vigilantMira == null || Vigilant.vigilantMira.Data.IsDead || Vigilant.vigilantMira != PlayerControl.LocalPlayer || PlayerControl.GameOptions.MapId != 1) {
@@ -1734,14 +1731,14 @@ namespace LasMonjas.Patches {
                 Vigilant.doorLogActivated = !Vigilant.doorLogActivated;
                 Vigilant.doorLog.SetActive(Vigilant.doorLogActivated);
             }
-        }        
+        }
         static void batUpdate() {
             if (Bat.bat == null)
                 return;
 
             if (Bat.frequencyTimer > 0 && Bat.bat != PlayerControl.LocalPlayer) {
                 if (!Bat.bat.Data.IsDead && Vector2.Distance(Bat.bat.transform.position, PlayerControl.LocalPlayer.transform.position) < (1f * Bat.frequencyRange)) {
-                    
+
                     PlayerControl.LocalPlayer.killTimer += Time.fixedDeltaTime;
 
                     foreach (CustomButton button in CustomButton.buttons) {
@@ -1789,7 +1786,7 @@ namespace LasMonjas.Patches {
                     }
                 }
             }
-        }       
+        }
         static void captureTheFlagUpdate() {
 
             if (!CaptureTheFlag.captureTheFlagMode && howmanygamemodesareon != 1)
@@ -1999,7 +1996,7 @@ namespace LasMonjas.Patches {
                 KingOfTheHill.greenTeam.RemoveAt(0);
                 KingOfTheHill.greenTeam.Add(KingOfTheHill.greenKingplayer);
                 return;
-            }           
+            }
 
             if (KingOfTheHill.yellowKingplayer != null && KingOfTheHill.yellowKingplayer.Data.Disconnected) {
                 KingOfTheHill.yellowTeam.Remove(KingOfTheHill.yellowKingplayer);
@@ -2041,7 +2038,7 @@ namespace LasMonjas.Patches {
                 KingOfTheHill.yellowTeam.RemoveAt(0);
                 KingOfTheHill.yellowTeam.Add(KingOfTheHill.yellowKingplayer);
                 return;
-            }        
+            }
         }
         static void hotPotatoUpdate() {
 
@@ -2158,7 +2155,7 @@ namespace LasMonjas.Patches {
                         HotPotato.triggerHotPotatoEnd = true;
                         ShipStatus.RpcEndGame((GameOverReason)CustomGameOverReason.HotPotatoEnd, false);
                     }
-                    
+
                     if (HotPotato.notPotato01 != null && notPotato.PlayerId == HotPotato.notPotato01.PlayerId) {
                         HotPotato.notPotatoTeam.Remove(HotPotato.notPotato01);
                     }
@@ -2207,7 +2204,7 @@ namespace LasMonjas.Patches {
                 }
             }
         }
-        
+
         static void zombieLaboratoryUpdate() {
 
             if (!ZombieLaboratory.zombieLaboratoryMode && howmanygamemodesareon != 1)
@@ -2997,7 +2994,7 @@ namespace LasMonjas.Patches {
             chameleonUpdate();
 
             //BountyHunter update
-            bountyHunterSuicideIfDisconnect();            
+            bountyHunterSuicideIfDisconnect();
 
             // Yinyanger update
             yinyangerUpdate();
@@ -3007,13 +3004,13 @@ namespace LasMonjas.Patches {
 
             // Stranded update
             strandedUpdate();
-            
+
             // Exiler update
             exilerWinIfDisconnect();
 
             // Seeker update
             seekerUpdate();
-            
+
             // FortuneTeller update
             fortuneTellerUpdate();
 
@@ -3022,7 +3019,7 @@ namespace LasMonjas.Patches {
 
             // Spiritualist update
             spiritualistUpdate();
-    
+
             // VigilantMira update
             vigilantMiraUpdate();
 

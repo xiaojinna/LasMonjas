@@ -8,14 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
-using Reactor;
 using LasMonjas.Objects;
 using LasMonjas.Patches;
 using static LasMonjas.RoleInfo;
 using LasMonjas.Core;
 using LasMonjas.Languages;
-using MS.Internal.Xml.XPath;
-using static UnityEngine.GraphicsBuffer;
+
 
 namespace LasMonjas
 {
@@ -43,20 +41,20 @@ namespace LasMonjas
         Yinyanger,
         Challenger,
         Ninja,
-        Berserker, 
-        Yandere, 
-        Stranded, 
-        Monja, 
+        Berserker,
+        Yandere,
+        Stranded,
+        Monja,
         Joker,
         RoleThief,
         Pyromaniac,
         TreasureHunter,
         Devourer,
         Poisoner,
-        Puppeteer, 
-        Exiler, 
-        Amnesiac, 
-        Seeker, 
+        Puppeteer,
+        Exiler,
+        Amnesiac,
+        Seeker,
         Captain,
         Mechanic,
         Sheriff,
@@ -80,7 +78,7 @@ namespace LasMonjas
         Bat,
         Necromancer,
         Engineer,
-        Shy, 
+        Shy,
         TaskMaster,
         Jailer,
         Lover,
@@ -249,7 +247,7 @@ namespace LasMonjas
         ShareOptions,
         ForceEnd,
         SetRole,
-        SetModifier, 
+        SetModifier,
         UseUncheckedVent,
         UncheckedMurderPlayer,
         UncheckedCmdReportDeadBody,
@@ -321,7 +319,7 @@ namespace LasMonjas
         SeekerSelectAttack,
 
         CaptainSpecialVote,
-        CaptainAutoCastSpecialVote, 
+        CaptainAutoCastSpecialVote,
         MechanicFixLights,
         MechanicUsedRepair,
         SheriffKill,
