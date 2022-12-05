@@ -549,6 +549,19 @@ namespace LasMonjas.Languages
                         "<color=#F2BEFFFF>粉色阵营</color>的分数！",
                         "<color=#808080FF>连环杀手</color>的分数！",
                     };
+            nextpage ="\n按Tab切换下一页";
+            ToLanguageName();
+        }
+        public static void ToLanguageName()
+        {
+            if(tolanguagename)
+            {
+                Rolesnames = new string[]{
+
+                };
+            }
+            else
+            English.Englishname();
         }
     }
 }

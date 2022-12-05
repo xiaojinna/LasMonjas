@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using static LasMonjas.LasMonjas;
+using LasMonjas.Languages;
 
 
 namespace LasMonjas.Core
@@ -52,21 +53,43 @@ namespace LasMonjas.Core
                                 case "english":
                                     infoText = "Las Monjas: language changed to English";
                                     LasMonjasPlugin.modLanguage.Value = 0;
-                                    break;
-                                case "spanish":
-                                    infoText = "Las Monjas: idioma cambiado a Español";
-                                    LasMonjasPlugin.modLanguage.Value = 12;
+                                    Language.LoadLanguage();
                                     break;
                                 case "japanese":
                                     infoText = "Las Monjas: 言語を日本語に変更";
                                     LasMonjasPlugin.modLanguage.Value = 11;
+                                    Language.LoadLanguage();
+                                    break;
+                                case "spanish":
+                                    infoText = "Las Monjas: idioma cambiado a Español";
+                                    LasMonjasPlugin.modLanguage.Value = 12;
+                                    Language.LoadLanguage();
                                     break;
                                 case "chinese":
                                     infoText = "Las Monjas: 语言改为中文";
                                     LasMonjasPlugin.modLanguage.Value = 13;
+                                    Language.LoadLanguage();
                                     break;
                                 default:
                                     infoText = "Las Monjas: language not supported";
+                                    break;
+                            }
+                            handled = true;
+                            __instance.AddChat(PlayerControl.LocalPlayer, infoText);
+                            //PlayerControl.LocalPlayer.RpcSendChat(infoText);
+                        }
+
+                        if (text.ToLower().StartsWith("/namelang "))
+                        {
+                            switch (subText.ToLower())
+                            {
+                                case "chinese":
+                                    infoText = "Las Monjas: 职业语言改为中文";
+                                    Language.tolanguagename = true;
+                                    Chinese.ToLanguageName();
+                                    break;
+                                default:
+                                    infoText = "";
                                     break;
                             }
                             handled = true;

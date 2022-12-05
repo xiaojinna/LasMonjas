@@ -29,21 +29,21 @@ namespace LasMonjas
         }
 
         // Capture the Flag Teams
-        public static RoleInfo redplayer01 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer01);
-        public static RoleInfo redplayer02 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer02);
-        public static RoleInfo redplayer03 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer03);
-        public static RoleInfo redplayer04 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer04);
-        public static RoleInfo redplayer05 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer05);
-        public static RoleInfo redplayer06 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer06);
-        public static RoleInfo redplayer07 = new RoleInfo("Red Team", Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer07);
-        public static RoleInfo blueplayer01 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer01);
-        public static RoleInfo blueplayer02 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer02);
-        public static RoleInfo blueplayer03 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer03);
-        public static RoleInfo blueplayer04 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer04);
-        public static RoleInfo blueplayer05 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer05);
-        public static RoleInfo blueplayer06 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer06);
-        public static RoleInfo blueplayer07 = new RoleInfo("Blue Team", Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer07);
-        public static RoleInfo stealerplayer = new RoleInfo("Flag Stealer", Color.grey, Language.roleInfoNames[2], Language.roleInfoNames[3], RoleId.StealerPlayer);
+        public static RoleInfo redplayer01 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer01);
+        public static RoleInfo redplayer02 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer02);
+        public static RoleInfo redplayer03 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer03);
+        public static RoleInfo redplayer04 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer04);
+        public static RoleInfo redplayer05 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer05);
+        public static RoleInfo redplayer06 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer06);
+        public static RoleInfo redplayer07 = new RoleInfo(Language.Rolesnames[1], Color.red, Language.roleInfoNames[0], Language.roleInfoNames[0], RoleId.RedPlayer07);
+        public static RoleInfo blueplayer01 = new RoleInfo(Language.Rolesnames[2], Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer01);
+        public static RoleInfo blueplayer02 = new RoleInfo(Language.Rolesnames[2], Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer02);
+        public static RoleInfo blueplayer03 = new RoleInfo(Language.Rolesnames[2],Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer03);
+        public static RoleInfo blueplayer04 = new RoleInfo(Language.Rolesnames[2], Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer04);
+        public static RoleInfo blueplayer05 = new RoleInfo(Language.Rolesnames[2], Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer05);
+        public static RoleInfo blueplayer06 = new RoleInfo(Language.Rolesnames[2], Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer06);
+        public static RoleInfo blueplayer07 = new RoleInfo(Language.Rolesnames[2], Color.blue, Language.roleInfoNames[1], Language.roleInfoNames[1], RoleId.BluePlayer07);
+        public static RoleInfo stealerplayer = new RoleInfo(Language.Rolesnames[3], Color.grey, Language.roleInfoNames[2], Language.roleInfoNames[3], RoleId.StealerPlayer);
 
         // Police and Thief Teams
         public static RoleInfo policeplayer01 = new RoleInfo("Police Officer", Color.cyan, Language.roleInfoNames[4], Language.roleInfoNames[4], RoleId.PolicePlayer01);
@@ -172,8 +172,8 @@ namespace LasMonjas
         public static RoleInfo pinkPlayer06 = new RoleInfo("Pink Team", Shy.color, Language.roleInfoNames[23], Language.roleInfoNames[23], RoleId.PinkPlayer06);
         public static RoleInfo pinkPlayer07 = new RoleInfo("Pink Team", Shy.color, Language.roleInfoNames[23], Language.roleInfoNames[23], RoleId.PinkPlayer07);
         public static RoleInfo serialKiller = new RoleInfo("Serial Killer", Joker.color, Language.helpersTexts[1], Language.helpersTexts[1], RoleId.SerialKiller);
-        
-        
+
+
         // Impostor roles
         public static RoleInfo mimic = new RoleInfo("Mimic", Mimic.color, Language.roleInfoNames[24], Language.roleInfoNames[24], RoleId.Mimic);
         public static RoleInfo painter = new RoleInfo("Painter", Painter.color, Language.roleInfoNames[25], Language.roleInfoNames[25], RoleId.Painter);
@@ -311,7 +311,7 @@ namespace LasMonjas
             fink,
             welder,
             spiritualist,
-            coward,         
+            coward,
             vigilant,
             vigilantMira,
             kid,

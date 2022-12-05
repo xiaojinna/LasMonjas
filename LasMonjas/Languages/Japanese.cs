@@ -549,6 +549,8 @@ namespace LasMonjas.Languages
                         "<color=#F2BEFFFF>ピンクのチーム</color>ポイント！",
                         "<color=#808080FF>シリアルキラーの</color>ポイント！",
                     };
+            nextpage = "\nTab for next page";
+            English.Englishname();
         }
     }
 }

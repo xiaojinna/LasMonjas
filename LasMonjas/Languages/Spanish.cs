@@ -549,6 +549,8 @@ namespace LasMonjas.Languages
                         "¡Puntos para el <color=#F2BEFFFF>Equipo Rosa</color>!",
                         "¡Puntos para el <color=#808080FF>Serial Killer</color>!",
                     };
+            nextpage = "\nTab for next page";
+            English.Englishname();
         }
     }
 }

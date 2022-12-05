@@ -240,7 +240,7 @@ namespace LasMonjas
         }
 
         private static Sprite pickTargetSprite;
-        
+
         public static Sprite getpickTargetSprite() {
             if (pickTargetSprite) return pickTargetSprite;
             pickTargetSprite = Helpers.loadSpriteFromResources("LasMonjas.Images.MimicPickTargetButton.png", 90f);
@@ -248,7 +248,7 @@ namespace LasMonjas
         }
 
         private static Sprite transformSprite;
-        
+
         public static Sprite getTransformSprite() {
             if (transformSprite) return transformSprite;
             transformSprite = Helpers.loadSpriteFromResources("LasMonjas.Images.MimicTransformButton.png", 90f);

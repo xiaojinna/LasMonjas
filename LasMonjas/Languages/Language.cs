@@ -2,6 +2,7 @@
 using static LasMonjas.Languages.Japanese;
 using static LasMonjas.Languages.Spanish;
 using static LasMonjas.Languages.Chinese;
+using AmongUs.Data.Legacy;
 
 namespace LasMonjas.Languages
 {
@@ -38,10 +39,19 @@ namespace LasMonjas.Languages
         public static string[] statusZombieLaboratoryTexts;
 
         public static string[] statusBattleRoyaleTexts;
+        public static string[] Rolesnames;
+        public static string nextpage;
+        public static bool tolanguagename;
         public static int AmongUslang;
+        public static void autolang()
+        {
+            AmongUslang = (int)LegacySaveManager.LastLanguage;
+            LasMonjasPlugin.modLanguage.Value = AmongUslang;
+            LoadLanguage();
+        }
         public static void LoadLanguage() {
-            AmongUslang = (int)AmongUs.Data.DataManager.settings.language.CurrentLanguage;
-            switch (LasMonjasPlugin.modLanguage.Value) {
+            switch (LasMonjasPlugin.modLanguage.Value)
+            {
                 // English
                 case 0:
                     Englishlang();

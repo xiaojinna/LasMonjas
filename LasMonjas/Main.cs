@@ -81,7 +81,9 @@ namespace LasMonjas
             if (MonjaCursor.Value) {
                 Helpers.enableCursor("start");
             }
+
             Language.LoadLanguage();
+            Language.autolang();
         }
     }
 
@@ -101,5 +103,5 @@ namespace LasMonjas
                 DataManager.Settings.Multiplayer.ChatMode = InnerNet.QuickChatModes.FreeChatOrQuickChat;
             }
         }
-    }        
+    }
 }

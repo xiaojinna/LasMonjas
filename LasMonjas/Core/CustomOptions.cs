@@ -7,6 +7,8 @@ using HarmonyLib;
 using Hazel;
 using System.Reflection;
 using System.Text;
+using LasMonjas.Languages;
+
 
 namespace LasMonjas.Core
 {
@@ -560,7 +562,7 @@ namespace LasMonjas.Core
                     break;
             }
 
-            hudString += $"\nTab for next page ({counter + 1}/11)";
+            hudString += Language.nextpage+$"({counter + 1}/11)";
             __result = hudString;
         }
     }
