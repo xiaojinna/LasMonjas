@@ -650,6 +650,13 @@ namespace LasMonjas.Languages
                 "Electrician",
                 "Lover",
                 "Loverstor",
+                "Modifiers",
+                "Capture the Flag",
+                "Police and Thieves",
+                "King of the Hill",
+                "Hot Potato",
+                "Zombie Laboratory",
+                "Battle Royale",
             };
         }
     }
